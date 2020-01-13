@@ -1,0 +1,48 @@
+server:
+  port: 3100
+  servlet:
+    context-path: /eureka
+
+eureka:
+  instance:
+    hostname: eureka0 #eurekade的主机名,实例名称
+    instance-id: eureka-0
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true  #单机设false 不注册自身
+    fetch-registry: true        #单机设false 不从eureka上获取注册信息
+    service-url:
+      defaultZone: http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+# server:
+#   enable-self-preservation: false  #关闭自我保护:true 为开启自我保护，false 为关闭自我保护
+#   eviction-interval-timer-in-ms: 6000   #清理间隔(单位:毫秒，默认是60*1000)
+
+
+spring:
+  application:
+    name: springcloud-eureka
+  security:
+    user:
+      name: xia
+      password: 123
+
+
+#优雅停服  curl -X POST http://127.0.0.1:3100/eureka/shutdown
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true #启用 shutdown
+      sensitive: false #禁用密码验证
+    health:
+      show-details: always
+
+
+logging:
+  config: classpath:logback-spring.xml
+
+

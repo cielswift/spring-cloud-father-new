@@ -1,0 +1,69 @@
+server:
+  port: 3201
+  servlet:
+    context-path: /producer #提供相同服务的两个微服务,访问路径要一致
+
+eureka:
+  instance:
+    prefer-ip-address: true #使用ip注册
+    instance-id: producer1-0-hystrix  #自定义服务信息,服务熔断
+  client:
+    service-url:
+      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+      #服务注册地址
+
+spring:
+  application:
+    name: springcloud-producer #会作为eureka组件的服务名,提供相同服务的两个微服务名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/ #配置静态资源路径,隔开多个
+  profiles:
+    active: dev #激活dev模式
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.ciel.cl:1600/scfn?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ciel
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 15
+      min-idle: 15
+      max-active: 50
+      timeBetweenEvictionRunsMillis: 50000
+      validationQuery: SELECT 1 FROM dual
+  aop:
+    proxy-target-class: true #使用cglib代理
+  redis:
+    host: 127.0.0.1
+    port: 6510
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  typeAliasesPackage: com.ciel.entity  #实体扫描
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql
+    map-underscore-to-camel-case: true #数据库下划线转换
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      updateStrategy: NOT_NULL  #为null 不更新
+      insertStrategy: NOT_NULL
+      selectStrategy: NOT_NULL
+
+---
+spring:
+  profiles: dev #dev模式
+logging:
+  config: classpath:logback-spring.xml
+
+
+

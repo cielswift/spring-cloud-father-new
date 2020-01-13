@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-consumer0/spring-cloud-father-new-consumer0.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-consumer0/spring-cloud-father-new-consumer0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-entity/spring-cloud-father-new-entity.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-entity/spring-cloud-father-new-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-eureka0/spring-cloud-father-new-eureka0.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-eureka0/spring-cloud-father-new-eureka0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-eureka1/spring-cloud-father-new-eureka1.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-eureka1/spring-cloud-father-new-eureka1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-eureka2/spring-cloud-father-new-eureka2.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-eureka2/spring-cloud-father-new-eureka2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-genertor/spring-cloud-father-new-genertor.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-genertor/spring-cloud-father-new-genertor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-producer0/spring-cloud-father-new-producer0.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-producer0/spring-cloud-father-new-producer0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-producer1/spring-cloud-father-new-producer1.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-producer1/spring-cloud-father-new-producer1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-sso/spring-cloud-father-new-sso.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-sso/spring-cloud-father-new-sso.iml" />
+    </modules>
+  </component>
+</project>
