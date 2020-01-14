@@ -3,8 +3,7 @@ server:
   servlet:
     context-path: /consumer #提供相同服务的两个微服务,访问路径要一致
 
-  #开启spring boot gzip压缩; 配合feign
-  compression:
+  compression: #开启springboot gzip压缩; 配合feign压缩
     enabled: true  #启用
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
 
@@ -44,29 +43,34 @@ spring:
         max-active: 8
         max-wait: 1000
 
+
 #   户端向服务器请求中带有：Accept-Encoding:gzip, deflate 字段，向服务器表示，
 #   客户端支持的压缩格式（gzip 或者 deflate)，如果不发送该消息头，服务器是不会压缩的;
 #   服务器返回压缩的格式并且携带 Content-Encoding:gzip 消息头，表示响应报文是根据该格式压缩过的。
 #   客户端接收到请求之后，先判断是否有 Content-Encoding 消息头，如果有，按该格式解压报文。否则按正常报文处理
 #   这里配置的Gzip压缩是只对Consumer请求Provider时进行的压缩
 
-#开启feign的压缩功能
 feign:
-  compression:
+  compression: #开启feign的压缩功能
     request:
       enabled: true   #配置请求 GZIP 压缩
       mime-types: text/xml,application/xml,application/json #配置压缩支持的 MIME TYPE
       min-request-size: 1024 #配置压缩数据大小的最小阀值，默认 2048
     response:
       enabled: true  #配置响应 GZIP 压缩
-  #使用HttpClient替换默认的HttpURLConnection   HttpClient自带连接池
-  httpclient:
+
+  httpclient: #使用HttpClient替换默认的HttpURLConnection   HttpClient自带连接池
     enabled: true
 
-#Feign 的负载均衡底层用的就是 Ribbon;
-ribbon:
+  #开启feign的降级熔断功能
+  hystrix:
+    enabled: true
+
+
+ribbon: #Feign 的负载均衡底层用的就是 Ribbon;
   ReadTimeout: 3000  #请求连接的超时时间 默认的时间为 1 秒
   ConnectTimeout: 3000 #请求处理的超时时间
+
 
 #根据服务名称进行局部超时配置
 SPRINGCLOUD-PRODUCER: #服务名称

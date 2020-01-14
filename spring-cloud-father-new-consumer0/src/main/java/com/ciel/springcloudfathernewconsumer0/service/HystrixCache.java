@@ -11,11 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 /**
- * 缓存功能
+ * 缓存功能 Hystrix 不支持第三方缓存; 使用springboot的缓存功能;
  */
 @Service
 @CacheConfig(cacheNames= "my_cache_user_consumer",cacheManager = "cacheManagerJSON")
-public class CacheService {
+public class HystrixCache {
 
     @Autowired
     private RestTemplate restTemplate;

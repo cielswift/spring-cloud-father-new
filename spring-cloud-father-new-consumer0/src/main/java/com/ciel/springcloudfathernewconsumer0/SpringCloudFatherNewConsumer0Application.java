@@ -25,7 +25,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient //服务注册eureka ,表示可以被Eureka注册中心发现
-@EnableAspectJAutoProxy  //开启基于注解的aop
+@EnableAspectJAutoProxy  //@EnableAspectJAutoProxy(proxyTargetClass = true)  //开启基于注解的aop;使用cglib
 @EnableCaching  //开启缓存功能
 
 @EnableFeignClients //无感知远程调用
@@ -38,23 +38,12 @@ public class SpringCloudFatherNewConsumer0Application {
         SpringApplication.run(SpringCloudFatherNewConsumer0Application.class, args);
     }
 
-
-    //feign请求超时,重试;hystrix服务降级和隔离处理,请求缓存和合并;
-
-    /**
-     * 服务雪崩
-     * 1.降级 超时,资源不足(线程或信号量)降级后可以配合降级接口返回托底数据。实现一个 fallback方法, 当请求后端服务出现异常的时候, 可以使用 fallback 方法返回的值
-     * 2隔离 限制调用分布式服务的资源使用，某一个调用的服务出现问题不会影响其他服务调用
-     * 3 熔断 当失败率(如因网络故障/超时造成的失败率高)达到阀值自动触发降级; 之后重试,如果成功关闭熔断,否则进入fallback方法;
-     * 4请求缓存
-     * 5请求合并
-     */
+    //feign请求超时,重试;hystrix服务降级,熔断和线程,信号量隔离,请求缓存和合并;feign和熔断测试,映射问题查找
 
     /**FEIGN 和 RIBBON 相关=============================================================================================*/
 
     /**
      * feign请求的调用耗时等,还需要在yml配置请求超时时间
-     *
      * NONE:不记录任何信息，默认值
      * BASIC:记录请求方法、请求 URL、状态码和用时
      * HEADERS:在 BASIC 基础上再记录一些常用信息

@@ -1,6 +1,7 @@
 package com.ciel.springcloudfathernewconsumer0.controller;
 
 import com.ciel.entity.User;
+import com.ciel.springcloudfathernewconsumer0.service.CusFeignHystrix;
 import com.ciel.springcloudfathernewconsumer0.service.CusUserFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,24 @@ import java.util.List;
 @RestController
 public class MainController {
 
+
     /***
-     * FEIGN 调用演示===========================================================================================
+     * FEIGN HYSTRIX 调用演示==========================================
      */
 
+    @Autowired
+    private CusFeignHystrix cusFeignHystrix;
+
+    @GetMapping("/feihys")
+    public Object feignHystrix(){
+
+        return cusFeignHystrix.usl();
+    }
+
+
+    /***
+     * FEIGN 调用演示===================================================
+     */
 
     @Autowired
     private CusUserFeign cusUserFeign;
