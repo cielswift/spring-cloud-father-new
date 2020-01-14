@@ -23,6 +23,11 @@
 
     <dependencies>
 
+        <dependency> <!--服务降级 熔断等-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
         <dependency> <!--web 启动-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

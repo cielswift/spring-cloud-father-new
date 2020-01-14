@@ -19,6 +19,15 @@ public class RoleController {
     @Autowired
     protected IRoleService roleService;
 
+    @GetMapping("/rs")
+    public List<Role> rs(){
+        Role role = new Role();
+        role.setName("圣父圣子圣灵");
+        List<Role> list = roleService.list();
+        list.add(role);
+        return list;
+    }
+
     @GetMapping("/roles")
     public List<Role> roles(User user){
         System.out.println(user);

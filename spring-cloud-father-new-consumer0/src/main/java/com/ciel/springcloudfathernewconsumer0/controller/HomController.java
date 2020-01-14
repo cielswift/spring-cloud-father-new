@@ -42,6 +42,8 @@ public class HomController {
 
         List<User> list=responseEntity.getBody();
         return list;
-
     }
+
+
+
 }

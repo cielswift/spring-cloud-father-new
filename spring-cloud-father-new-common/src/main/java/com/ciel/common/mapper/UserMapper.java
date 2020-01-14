@@ -1,8 +1,10 @@
 package com.ciel.common.mapper;
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ciel.entity.User;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,7 +14,8 @@ import com.ciel.entity.User;
  * @author xiapeixin
  * @since 2020-01-10
  */
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-
+    public List<User> myList();
 }

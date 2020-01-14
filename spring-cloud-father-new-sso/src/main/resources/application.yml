@@ -52,10 +52,16 @@ spring:
       validationQuery: SELECT 1 FROM dual
   aop:
     proxy-target-class: true #使用cglib代理
-
-  redis:
+  redis:   #redis配置
     host: 127.0.0.1
     port: 6510
+    database: 0
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 3
+        max-active: 8
+        max-wait: 1000
 
 #服务监控显示所有信息
 management:

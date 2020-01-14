@@ -2,8 +2,11 @@ package com.ciel.springcloudfathernewconsumer0;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.*;
+import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -23,16 +26,44 @@ import java.util.List;
 @SpringBootApplication
 @EnableEurekaClient //服务注册eureka ,表示可以被Eureka注册中心发现
 @EnableAspectJAutoProxy  //开启基于注解的aop
+@EnableCaching  //开启缓存功能
 
 @EnableFeignClients //无感知远程调用
-@EnableDiscoveryClient ////无感知远程调用
+@EnableDiscoveryClient //无感知远程调用
+
+@EnableCircuitBreaker   //添加熔断器,开启熔断
 public class SpringCloudFatherNewConsumer0Application {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCloudFatherNewConsumer0Application.class, args);
     }
 
-    //restTemplate乱码问题处理,以及微服务间文件上传;自定义负载均衡器,feign无感知调用,404问题,传参问题处理;feign的压缩性能优化
+
+    //feign请求超时,重试;hystrix服务降级和隔离处理,请求缓存和合并;
+
+    /**
+     * 服务雪崩
+     * 1.降级 超时,资源不足(线程或信号量)降级后可以配合降级接口返回托底数据。实现一个 fallback方法, 当请求后端服务出现异常的时候, 可以使用 fallback 方法返回的值
+     * 2隔离 限制调用分布式服务的资源使用，某一个调用的服务出现问题不会影响其他服务调用
+     * 3 熔断 当失败率(如因网络故障/超时造成的失败率高)达到阀值自动触发降级; 之后重试,如果成功关闭熔断,否则进入fallback方法;
+     * 4请求缓存
+     * 5请求合并
+     */
+
+    /**FEIGN 和 RIBBON 相关=============================================================================================*/
+
+    /**
+     * feign请求的调用耗时等,还需要在yml配置请求超时时间
+     *
+     * NONE:不记录任何信息，默认值
+     * BASIC:记录请求方法、请求 URL、状态码和用时
+     * HEADERS:在 BASIC 基础上再记录一些常用信息
+     * FULL:记录请求和相应的所有信息
+     */
+    @Bean
+    public Logger.Level getLogs(){
+        return Logger.Level.FULL;
+    }
 
     @Bean
     @LoadBalanced()  //启用负载均衡机制  不能和@Autowired private LoadBalancerClient balancerClient; 同时使用
@@ -83,7 +114,6 @@ public class SpringCloudFatherNewConsumer0Application {
              index = 0 // 当前对外提供服务的服务器地址，
              total需要重新置为零，但是已经达到过一个5次，我们的index = 1
              */
-
             private int total = 0;             // 总共被调用的次数，目前要求每台被调用5次
             private int currentIndex = 0;    // 当前提供服务的机器号
 

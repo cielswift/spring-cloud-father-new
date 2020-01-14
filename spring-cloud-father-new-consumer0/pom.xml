@@ -23,6 +23,11 @@
 
     <dependencies>
 
+        <dependency> <!--服务降级 熔断等-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
         <dependency> <!-- 使用Apache HttpClient替换Feign原生httpURLConnection -->
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -50,7 +55,7 @@
             <artifactId>spring-cloud-father-new-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <exclusions>
-                <exclusion>
+                <exclusion> <!--消费者不需要连接jdbc-->
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-jdbc</artifactId>
                  </exclusion>

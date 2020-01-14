@@ -12,23 +12,39 @@ import java.util.List;
 @RestController
 public class MainController {
 
+    /***
+     * FEIGN 调用演示===========================================================================================
+     */
+
+
     @Autowired
     private CusUserFeign cusUserFeign;
 
     @GetMapping("/main")
-    public Object main(String name){
+    public Object main(String name) {
 
-        return cusUserFeign.list2(name,24);
+        return cusUserFeign.list2(name, 24);
     }
 
 
     @GetMapping("/fuck")
-    public Object fuck(){
+    public Object fuck() {
         User user = new User();
         user.setName("xiapeixin");
         user.setPrice(new BigDecimal("499.98"));
 
         List<User> users = cusUserFeign.list3(user);
+
+        return users;
+    }
+
+    @GetMapping("/add")
+    public Object add() {
+        User user = new User();
+        user.setName("xiapeixin");
+        user.setPrice(new BigDecimal("499.98"));
+
+        List<User> users = cusUserFeign.add3(user);
 
         return users;
     }

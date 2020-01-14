@@ -9,14 +9,14 @@
         <module name="spring-cloud-father-new-eureka1" />
         <module name="spring-cloud-father-new-eureka0" />
         <module name="spring-cloud-father-new-genertor" />
-        <module name="spring-cloud-father-new-entity" />
+        <module name="spring-cloud-father-new-consumer0" />
+        <module name="spring-cloud-father-new-api" />
         <module name="spring-cloud-father-new-sso" />
         <module name="spring-cloud-father-new-producer0" />
-        <module name="spring-cloud-father-new-eureka2" />
         <module name="spring-cloud-father-new-producer1" />
         <module name="spring-cloud-father-new-common" />
-        <module name="spring-cloud-father-new-api" />
-        <module name="spring-cloud-father-new-consumer0" />
+        <module name="spring-cloud-father-new-entity" />
+        <module name="spring-cloud-father-new-eureka2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

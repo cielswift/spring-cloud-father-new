@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ciel.api.CustomFeign;
 import com.ciel.api.IUserService;
 import com.ciel.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @RestController
 public class CustomFeignController implements CustomFeign  {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
 
     @Autowired
     private IUserService iUserService;
@@ -34,5 +38,14 @@ public class CustomFeignController implements CustomFeign  {
     public List<User> list3(User user) {
         return iUserService.list(new LambdaQueryWrapper<User>().eq(User::getName,user.getName()));
     }
+
+    @Override
+    public List<User> add3(User user) {
+        logger.warn("++++++++++++++++++++++++++++++++++++++++++++++++++");
+        logger.warn(user.toString());
+
+        return iUserService.list();
+    }
+
 
 }

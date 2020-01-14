@@ -1,6 +1,7 @@
 package com.ciel.api;
 
 import com.ciel.entity.User;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,5 +28,11 @@ public interface CustomFeign {
     @PostMapping("/list3")
     public List<User> list3(@RequestBody User user);
 
+    /**
+     * 使用HTTPClient提升连接性能,get方式
+     * @return
+     */
+    @GetMapping(value="/add3",consumes= MediaType.APPLICATION_JSON_VALUE)
+    public List<User> add3(@RequestBody User user);
 
 }
