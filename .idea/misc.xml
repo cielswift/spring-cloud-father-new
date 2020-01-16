@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/spring-cloud-father-new-consumer0/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-father-new-producer1/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-father-new-turbines/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-father-new-zuul/pom.xml" />
       </list>
     </option>
   </component>

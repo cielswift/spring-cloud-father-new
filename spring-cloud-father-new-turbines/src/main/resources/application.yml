@@ -33,15 +33,16 @@ spring:
   aop:
     proxy-target-class: true #使用cglib代理
   redis:   #redis配置
-    host: 127.0.0.1
+    host: 106.13.56.37
     port: 6510
     database: 1
+    password: ciel
     jedis:
       pool:
-        max-idle: 10
-        min-idle: 3
-        max-active: 8
-        max-wait: 1000
+        max-idle: 5
+        min-idle: 2
+        max-active: 5
+        max-wait: 2000
   rabbitmq:
     host: 127.0.0.1
     port: 5672

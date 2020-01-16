@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /producer #提供相同服务的两个微服务,访问路径要一致
 
+  compression: #开启springboot gzip压缩; 配合feign压缩
+    enabled: true  #启用
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
 eureka:
   instance:
     prefer-ip-address: true #使用ip注册
@@ -41,9 +45,17 @@ spring:
       validationQuery: SELECT 1 FROM dual
   aop:
     proxy-target-class: true #使用cglib代理
-  redis:
-    host: 127.0.0.1
+  redis:   #redis配置
+    host: 106.13.56.37
     port: 6510
+    database: 1
+    password: ciel
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 2
+        max-active: 5
+        max-wait: 2000
 
 #  shardingsphere:  #分库分表
 #    datasource:

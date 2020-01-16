@@ -18,6 +18,7 @@
         <module>spring-cloud-father-new-api</module>
         <module>spring-cloud-father-new-sso</module>
         <module>spring-cloud-father-new-turbines</module>
+        <module>spring-cloud-father-new-zuul</module>
     </modules>
 
     <parent>
@@ -113,13 +114,13 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

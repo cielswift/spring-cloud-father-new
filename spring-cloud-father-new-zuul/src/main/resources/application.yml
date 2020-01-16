@@ -1,0 +1,86 @@
+server:
+  port: 3600
+  servlet:
+    context-path: /zuul #提供相同服务的两个微服务,访问路径要一致
+
+  compression: #开启springboot gzip压缩; 配合feign压缩
+    enabled: true  #启用
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+eureka:
+  instance:
+    prefer-ip-address: true #使用ip注册
+    instance-id: zuul-0-hystrix  #自定义服务信息,服务熔断
+  client:
+    service-url: #服务注册地址
+      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+spring:
+  application:
+    name: springcloud-zuul #会作为eureka组件的服务名,提供相同服务的两个微服务名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/ #配置静态资源路径,隔开多个
+  profiles:
+    active: dev #激活dev模式
+  aop:
+    proxy-target-class: true #使用cglib代理
+  redis:   #redis配置
+    host: 106.13.56.37
+    port: 6510
+    database: 1
+    password: ciel
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 2
+        max-active: 5
+        max-wait: 2000
+
+#路由网关
+zuul:
+  routes:
+    #springcloud-consumer:  #服务名称
+      #path: /springcloud-consumer/**  #匹配关键字，如果包含path就跳转到指定的 URL中
+      #url: http://127.0.0.1:3300/consumer/  #通过真实url
+
+      #这种方式来访问 http://127.0.0.1:3600/zuul/springcloud-consumer/fhf
+      #http:// 网关服务地址 :网关服务端口 /访问的服务名称 /访问服务的接口地址
+        #path 中符号的含义; /?匹配一个字符, /*匹配任意字符，但只能匹配单层路径, /**匹配任意字符，可以匹配多层路径
+
+    #springcloud-consumer:  #服务名称
+      #path: /springcloud-consumer/** #匹配关键字，如果包含path就跳转到指定的 URL中,这里通过服务名称取url
+      #serviceId: springcloud-consumer #通过在eureka注册的服务名称,如果和父级的服务名称相同可以不写;
+
+      #这种方式来访问 http://127.0.0.1:3600/zuul/springcloud-consumer/consumer/fhf
+
+    springcloud-consumer:
+      path: /springcloud-consumer/** #访问zuul的地址,如果和父级的服务名称相同可以不写serviceId;
+
+  ignored-services: /* #排除服务,忽略服务真实名称
+  ignored-patterns: /*/findall #排除指定路径 使用符号统配
+  prefix: /ciel #访问前缀  #这种方式访问 http://127.0.0.1:3600/zuul/ciel/springcloud-consumer/consumer/fhf
+
+#开启监控 也是为了zuul整合hystrix
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+spring:
+  profiles: dev #dev模式
+logging:
+  config: classpath:logback-spring.xml
+
+
+
+

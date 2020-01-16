@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-producer1/spring-cloud-father-new-producer1.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-producer1/spring-cloud-father-new-producer1.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-sso/spring-cloud-father-new-sso.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-sso/spring-cloud-father-new-sso.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-turbines/spring-cloud-father-new-turbines.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-turbines/spring-cloud-father-new-turbines.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-zuul/spring-cloud-father-new-zuul.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-zuul/spring-cloud-father-new-zuul.iml" />
     </modules>
   </component>
 </project>

@@ -43,6 +43,8 @@ public class SpringCloudFatherNewConsumer0Application {
         SpringApplication.run(SpringCloudFatherNewConsumer0Application.class, args);
     }
 
+    //sharding-jdbc和mysql兼容问题;微服多路多级调用;zuul的路由网关;路由拦截异常处理;整合hystrix
+
     /**FEIGN 和 RIBBON 相关=============================================================================================*/
 
     /**
