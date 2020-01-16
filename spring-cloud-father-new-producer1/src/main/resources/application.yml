@@ -6,7 +6,7 @@ server:
 eureka:
   instance:
     prefer-ip-address: true #使用ip注册
-    instance-id: producer1-0-hystrix  #自定义服务信息,服务熔断
+    instance-id: producer-1-hystrix  #自定义服务信息,服务熔断
   client:
     service-url:
       defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
@@ -29,7 +29,7 @@ spring:
     active: dev #激活dev模式
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql.ciel.cl:1600/scfn?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql.ciel.cl:1600/ds0?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: ciel
     type: com.alibaba.druid.pool.DruidDataSource
@@ -45,6 +45,47 @@ spring:
     host: 127.0.0.1
     port: 6510
 
+#  shardingsphere:  #分库分表
+#    dataSources:
+#      names:  ds0,ds1  #指定数据库
+#      ds0: !!com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://mysql.ciel.cl:1600/ds0?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+#        username: root
+#        password: ciel
+#      ds1: !!com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.cj.jdbc.Driver
+#        url: jdbc:mysql://mysql.ciel.cl:1601/ds1?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+#        username: root
+#        password: ciel
+#
+#
+#    sharding:  # 分库策略 根据id取模确定数据进哪个数据库
+#      default-database-strategy:
+#        inline:
+#          sharding-column: id
+#          algorithm-expression: ds$->{id % 2}
+#
+#      tables:   #具体分表策略 ,# 节点 ds0.t_order_0,ds0.t_order_1,ds1.t_order_0,ds1.t_order_1
+#        t_order:
+#          actual-data-nodes: ds$->{0..1}.t_order$->{0..2}
+#          table-strategy:
+#            inline:
+#              sharding-column: id  # 分表字段id
+#              algorithm-expression: t_order$->{id % 2} # 分表策略 根据id取模,确定数据最终落在那个表中
+#          key-generator: # 使用SNOWFLAKE算法生成主键
+#            column: id
+#            type: SNOWFLAKE
+#    #        t_order_item:
+#    #          actual-data-nodes: ds$->{0..1}.t_order_item$->{0..1}
+#    #          table-strategy:
+#    #            inline:
+#    #              sharding-column: order_id
+#    #              algorithm-expression: t_order_item$->{order_id % 2}
+#    props:
+#      sql:
+#        show: true #打印sql
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   typeAliasesPackage: com.ciel.entity  #实体扫描
@@ -58,6 +99,13 @@ mybatis-plus:
       updateStrategy: NOT_NULL  #为null 不更新
       insertStrategy: NOT_NULL
       selectStrategy: NOT_NULL
+
+#服务监控显示所有信息,2.0后需要手动开启,这段配置的效果相当于创建了Dashboard的配置类
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 ---
 spring:

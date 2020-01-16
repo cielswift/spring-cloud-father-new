@@ -9,14 +9,15 @@
         <module name="spring-cloud-father-new-eureka1" />
         <module name="spring-cloud-father-new-eureka0" />
         <module name="spring-cloud-father-new-genertor" />
-        <module name="spring-cloud-father-new-consumer0" />
-        <module name="spring-cloud-father-new-api" />
+        <module name="spring-cloud-father-new-eureka2" />
+        <module name="spring-cloud-father-new-entity" />
         <module name="spring-cloud-father-new-sso" />
         <module name="spring-cloud-father-new-producer0" />
+        <module name="spring-cloud-father-new-turbines" />
         <module name="spring-cloud-father-new-producer1" />
         <module name="spring-cloud-father-new-common" />
-        <module name="spring-cloud-father-new-entity" />
-        <module name="spring-cloud-father-new-eureka2" />
+        <module name="spring-cloud-father-new-api" />
+        <module name="spring-cloud-father-new-consumer0" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,6 +33,8 @@
       <module name="spring-cloud-father-new-producer0" target="12" />
       <module name="spring-cloud-father-new-producer1" target="12" />
       <module name="spring-cloud-father-new-sso" target="12" />
+      <module name="spring-cloud-father-new-turbine" target="12" />
+      <module name="spring-cloud-father-new-turbines" target="12" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -48,6 +51,8 @@
       <module name="spring-cloud-father-new-producer0" options="-parameters" />
       <module name="spring-cloud-father-new-producer1" options="-parameters" />
       <module name="spring-cloud-father-new-sso" options="-parameters" />
+      <module name="spring-cloud-father-new-turbine" options="-parameters" />
+      <module name="spring-cloud-father-new-turbines" options="-parameters" />
     </option>
   </component>
 </project>

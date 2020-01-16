@@ -23,6 +23,31 @@
 
     <dependencies>
 
+        <!--consumer端-->
+        <!--  使用RabbitMQ监控时需添加的-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;  使用RabbitMQ监控时需添加的&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>-->
+<!--        </dependency>-->
+
+
+        <!-- 可视化数据监控dashboard ,针对 Hystrix 进行实时监控的工具-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+
+        <!-- 监控中心坐标 父类已经添加了这里不用添加;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
+
         <dependency> <!--服务降级 熔断等-->
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>

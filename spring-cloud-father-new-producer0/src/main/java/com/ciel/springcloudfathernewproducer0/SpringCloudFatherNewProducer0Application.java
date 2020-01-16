@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
@@ -21,6 +23,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy  //开启基于注解的aop
 @MapperScan("com.ciel.common.mapper")
 @EnableTransactionManagement //开启事务
+
+@EnableHystrix //hystrix 服务监控
+@EnableHystrixDashboard //hystrixDashboard 服务监控
+
 public class SpringCloudFatherNewProducer0Application {
 
     public static void main(String[] args) {

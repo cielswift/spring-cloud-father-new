@@ -1,0 +1,128 @@
+server:
+  port: 3500
+  servlet:
+    context-path: /turbines #提供相同服务的两个微服务,访问路径要一致
+
+  compression: #开启springboot gzip压缩; 配合feign压缩
+    enabled: true  #启用
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+eureka:
+  instance:
+    prefer-ip-address: true #使用ip注册
+    instance-id: turbines-0-hystrix  #自定义服务信息,服务熔断
+  client:
+    service-url: #服务注册地址
+      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+spring:
+  application:
+    name: springcloud-turbines #会作为eureka组件的服务名,提供相同服务的两个微服务名称要一致
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/ #配置静态资源路径,隔开多个
+  profiles:
+    active: dev #激活dev模式
+  aop:
+    proxy-target-class: true #使用cglib代理
+  redis:   #redis配置
+    host: 127.0.0.1
+    port: 6510
+    database: 1
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 3
+        max-active: 8
+        max-wait: 1000
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: ciel
+    password: c
+    virtual-host: /
+
+#   户端向服务器请求中带有：Accept-Encoding:gzip, deflate 字段，向服务器表示，
+#   客户端支持的压缩格式（gzip 或者 deflate)，如果不发送该消息头，服务器是不会压缩的;
+#   服务器返回压缩的格式并且携带 Content-Encoding:gzip 消息头，表示响应报文是根据该格式压缩过的。
+#   客户端接收到请求之后，先判断是否有 Content-Encoding 消息头，如果有，按该格式解压报文。否则按正常报文处理
+#   这里配置的Gzip压缩是只对Consumer请求Provider时进行的压缩
+
+feign:
+  compression: #开启feign的压缩功能
+    request:
+      enabled: true   #配置请求 GZIP 压缩
+      mime-types: text/xml,application/xml,application/json #配置压缩支持的 MIME TYPE
+      min-request-size: 1024 #配置压缩数据大小的最小阀值，默认 2048
+    response:
+      enabled: true  #配置响应 GZIP 压缩
+
+  httpclient: #使用HttpClient替换默认的HttpURLConnection   HttpClient自带连接池
+    enabled: true
+
+  hystrix:
+    enabled: true  #开启feign的降级熔断功能
+
+#监控多个服务
+turbine:    #配置Eureka 中的 serviceId 列表，表明监控哪些服务
+  app-config: SPRINGCLOUD-CONSUMER/consumer
+  #指定聚合哪些集群，多个使用","分割，默认为 default。可使用 http://.../turbine.stream?cluster={clusterConfig 之一}访问
+  aggregator:
+    cluster-config: default
+      # 1. clusterNameExpression 指定集群名称，默认表达式 appName；此 时：turbine.aggregator.clusterConfig 需要配置想要监控的应用名称；
+      # 2. 当 clusterNameExpression: default 时， turbine.aggregator.clusterConfig 可以不写，因为默认就是 default；
+    # 3. 当 clusterNameExpression: metadata['cluster']时，假设想要 监控的应用配置了 eureka.instance.metadata-map.cluster: ABC，
+    #          则需要配置，同时 turbine.aggregator.clusterConfig: ABC
+  cluster-name-expression: new String("default")
+
+#服务监控显示所有信息,2.0后需要手动开启,这段配置的效果相当于创建了Dashboard的配置类
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+ribbon: #Feign 的负载均衡底层用的就是 Ribbon;
+  ReadTimeout: 3000  #请求连接的超时时间 默认的时间为 1 秒
+  ConnectTimeout: 3000 #请求处理的超时时间
+
+
+#根据服务名称进行局部超时配置
+SPRINGCLOUD-PRODUCER: #服务名称
+  ribbon:
+    OkToRetryOnAllOperations: true # 对所有操作请求都进行重试
+    MaxAutoRetries: 2 # 对当前实例的重试次数
+    MaxAutoRetriesNextServer:  0  #切换实例的重试次数
+    ConnectTimeout: 3000 # 请求连接的超时时间
+    ReadTimeout: 3000 # 请求处理的超时时间
+
+
+#设置负载均衡策略 eureka-provider 为调用的服务的名称;一般不用这个而是在配置类中定义 @Bean public IRule ...
+#eureka-provider:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule.RandomRule
+
+# 去掉eureka 直连生产者
+#ribbon:
+#  eureka:
+#    enabled: false
+#springcloud-producer:
+#  ribbon:
+#    listOfServers: http://127.0.0.1:3200/producer
+
+---
+spring:
+  profiles: dev #dev模式
+logging:
+  config: classpath:logback-spring.xml
+
+
+

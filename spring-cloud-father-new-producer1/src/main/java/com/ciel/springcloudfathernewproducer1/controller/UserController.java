@@ -1,6 +1,8 @@
 package com.ciel.springcloudfathernewproducer1.controller;
 
+import com.ciel.api.ITOrderService;
 import com.ciel.api.IUserService;
+import com.ciel.entity.TOrder;
 import com.ciel.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,22 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private ITOrderService itOrderService;
+
+    @GetMapping("/fkfb")
+    public Object fkfb(){
+
+        TOrder tOrder = new TOrder();
+        tOrder.setName("aaaaaaaaaa");
+        tOrder.setType("bbbbbbbbb");
+        tOrder.setGmtCreate(LocalDateTime.now());
+
+        itOrderService.save(tOrder);
+
+        return Map.of("ok","+++++++++++++++++++++");
+    }
 
     @GetMapping("/list")
     public List<User> list(){

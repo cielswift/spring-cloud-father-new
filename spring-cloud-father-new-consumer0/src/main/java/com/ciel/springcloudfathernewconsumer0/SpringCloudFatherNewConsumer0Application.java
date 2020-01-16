@@ -10,6 +10,8 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -32,13 +34,14 @@ import java.util.List;
 @EnableDiscoveryClient //无感知远程调用
 
 @EnableCircuitBreaker   //添加熔断器,开启熔断
+
+@EnableHystrix //hystrix 服务监控
+@EnableHystrixDashboard //hystrixDashboard 服务监控
 public class SpringCloudFatherNewConsumer0Application {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCloudFatherNewConsumer0Application.class, args);
     }
-
-    //feign请求超时,重试;hystrix服务降级,熔断和线程,信号量隔离,请求缓存和合并;feign和熔断测试,映射问题查找
 
     /**FEIGN 和 RIBBON 相关=============================================================================================*/
 

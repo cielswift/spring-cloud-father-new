@@ -17,6 +17,7 @@
         <module>spring-cloud-father-new-common</module>
         <module>spring-cloud-father-new-api</module>
         <module>spring-cloud-father-new-sso</module>
+        <module>spring-cloud-father-new-turbines</module>
     </modules>
 
     <parent>
@@ -49,7 +50,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
 <!--        <dependency> &lt;!&ndash;可视化监控&ndash;&gt;-->
 <!--            <groupId>de.codecentric</groupId>-->

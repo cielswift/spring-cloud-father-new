@@ -10,7 +10,7 @@ server:
 eureka:
   instance:
     prefer-ip-address: true #使用ip注册
-    instance-id: consumer0-0-hystrix  #自定义服务信息,服务熔断
+    instance-id: consumer-0-hystrix  #自定义服务信息,服务熔断
   client:
     service-url: #服务注册地址
       defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
@@ -42,7 +42,12 @@ spring:
         min-idle: 3
         max-active: 8
         max-wait: 1000
-
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: ciel
+    password: c
+    virtual-host: /
 
 #   户端向服务器请求中带有：Accept-Encoding:gzip, deflate 字段，向服务器表示，
 #   客户端支持的压缩格式（gzip 或者 deflate)，如果不发送该消息头，服务器是不会压缩的;
@@ -62,10 +67,15 @@ feign:
   httpclient: #使用HttpClient替换默认的HttpURLConnection   HttpClient自带连接池
     enabled: true
 
-  #开启feign的降级熔断功能
   hystrix:
-    enabled: true
+    enabled: true  #开启feign的降级熔断功能
 
+#服务监控显示所有信息,2.0后需要手动开启,这段配置的效果相当于创建了Dashboard的配置类
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 ribbon: #Feign 的负载均衡底层用的就是 Ribbon;
   ReadTimeout: 3000  #请求连接的超时时间 默认的时间为 1 秒

@@ -2,6 +2,7 @@ package com.ciel.springcloudfathernewconsumer0.controller;
 
 import com.ciel.entity.User;
 import com.ciel.springcloudfathernewconsumer0.service.CusFeignHystrix;
+import com.ciel.springcloudfathernewconsumer0.service.CusFeignHystrixFactory;
 import com.ciel.springcloudfathernewconsumer0.service.CusUserFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,24 @@ import java.util.List;
 @RestController
 public class MainController {
 
-
     /***
      * FEIGN HYSTRIX 调用演示==========================================
      */
 
+    /**
+     * fallbackFactory
+     */
+    @Autowired
+    private CusFeignHystrixFactory cusFeignHystrixFactory;
+
+    @GetMapping("/fhf")
+    public Object fhf(){
+        return  cusFeignHystrixFactory.fhf();
+    }
+
+    /**
+     * fallback
+     */
     @Autowired
     private CusFeignHystrix cusFeignHystrix;
 
