@@ -10,5 +10,5 @@ import java.util.List;
 public interface CustomFeignHystrixFactory {
 
     @GetMapping("/fhf")
-    public List<User> fhf();
+    public List<User> fhf() throws InterruptedException;
 }

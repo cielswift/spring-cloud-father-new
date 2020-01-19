@@ -30,12 +30,17 @@ import java.util.List;
 @EnableAspectJAutoProxy  //@EnableAspectJAutoProxy(proxyTargetClass = true)  //开启基于注解的aop;使用cglib
 @EnableCaching  //开启缓存功能
 
-@EnableFeignClients //无感知远程调用
-@EnableDiscoveryClient //无感知远程调用
+@EnableFeignClients //无感知远程调用 (包装了Ribbon)
+/**
+ * 和@EnableEurekaClient共同点就是：都是能够让注册中心能够发现，扫描到该服务。
+ * 不同点：@EnableEurekaClient只适用于Eureka作为注册中心，
+ * @EnableDiscoveryClient 可以是其他注册中心如Zookeeper、Consul等;
+ */
+@EnableDiscoveryClient  //(无感知远程调用需要)
 
 @EnableCircuitBreaker   //添加熔断器,开启熔断
 
-@EnableHystrix //hystrix 服务监控
+@EnableHystrix //hystrix 服务监控,容错保护
 @EnableHystrixDashboard //hystrixDashboard 服务监控
 public class SpringCloudFatherNewConsumer0Application {
 
@@ -60,7 +65,7 @@ public class SpringCloudFatherNewConsumer0Application {
     }
 
     @Bean
-    @LoadBalanced()  //启用负载均衡机制  不能和@Autowired private LoadBalancerClient balancerClient; 同时使用
+    @LoadBalanced()  //启用负载均衡机制  不能和@Autowired private LoadBalancerClient balancerClient; 同时使用 ;配合@EnableFeignClients
     public RestTemplate restTemplate() { //服务调用者
         //   return new RestTemplate();
 

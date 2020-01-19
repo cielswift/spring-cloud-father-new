@@ -1,0 +1,94 @@
+server:
+  port: 3700
+  servlet:
+#    context-path: /config  #这里不能使用项目路径, 否则其他项目加载不到配置文件
+
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 100
+    max-connections: 100
+    connection-timeout: 5000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: config-0-hystrix
+  client:
+    service-url:
+      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+spring:
+  application:
+    name: springcloud-config
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/
+  profiles:
+    active: dev
+  aop:
+    proxy-target-class: true
+  redis:
+    host: 106.13.56.37
+    port: 6510
+    database: 1
+    password: ciel
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 2
+        max-active: 5
+        max-wait: 2000
+
+  cloud: #分布式配置
+    config:
+      server:
+        git:
+          uri: https://github.com/cielswift/spring-cloud-father-new-config.git
+          search-paths: client  #配置文件在../client/ 下
+          username: cielswift
+          password: xiapeixin202
+          # 创建client-dev.yml ,client-prod.yml
+          # 访问方式 http://127.0.0.1:3700/config/client/dev
+          skip-ssl-validation: true  #解决Cannot clone or checkout repository 的问题
+
+#使用非对称加密
+# keytool -genkeypair -alias "xia" -keyalg "RSA" -keystore "xiapeixin.key"
+encrypt:
+  key-store:
+    # keystore 文件的路径
+    location: classpath:xiapeixin.key
+    # alias 指定密钥对的别名，该别名是公开的;
+    alias: xia
+    # storepass 密钥仓库
+    password: xiapeixin
+    # keypass 用来保护所生成密钥对中的私钥
+    secret: xiapeixin
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+spring:
+  profiles: dev
+logging:
+  config: classpath:logback-spring.xml
+
+
+
+
+

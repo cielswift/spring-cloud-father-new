@@ -60,24 +60,23 @@ spring:
 #  shardingsphere:  #分库分表
 #    dataSources:
 #      names:  ds0,ds1  #指定数据库
-#      ds0: !!com.alibaba.druid.pool.DruidDataSource
+#      ds0:
+#        type: com.alibaba.druid.pool.DruidDataSource
 #        driverClassName: com.mysql.cj.jdbc.Driver
 #        url: jdbc:mysql://mysql.ciel.cl:1600/ds0?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
 #        username: root
 #        password: ciel
-#      ds1: !!com.alibaba.druid.pool.DruidDataSource
+#      ds1:
+#        type: com.alibaba.druid.pool.DruidDataSource
 #        driverClassName: com.mysql.cj.jdbc.Driver
 #        url: jdbc:mysql://mysql.ciel.cl:1601/ds1?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
 #        username: root
 #        password: ciel
-#
-#
 #    sharding:  # 分库策略 根据id取模确定数据进哪个数据库
 #      default-database-strategy:
 #        inline:
 #          sharding-column: id
 #          algorithm-expression: ds$->{id % 2}
-#
 #      tables:   #具体分表策略 ,# 节点 ds0.t_order_0,ds0.t_order_1,ds1.t_order_0,ds1.t_order_1
 #        t_order:
 #          actual-data-nodes: ds$->{0..1}.t_order$->{0..2}

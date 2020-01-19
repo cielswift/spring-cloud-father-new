@@ -7,6 +7,12 @@ server:
     enabled: true  #启用
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
 
+  tomcat: #tomcat优化
+    min-spare-threads: 20 #初始化线程
+    max-threads: 100 #最大线程
+    max-connections: 100 #连接数
+    connection-timeout: 5000 #超时
+
 eureka:
   instance:
     prefer-ip-address: true #使用ip注册
@@ -44,8 +50,7 @@ spring:
         max-active: 5
         max-wait: 2000
 
-#路由网关
-zuul:
+zuul: #路由网关
   routes:
     #springcloud-consumer:  #服务名称
       #path: /springcloud-consumer/**  #匹配关键字，如果包含path就跳转到指定的 URL中
@@ -67,6 +72,45 @@ zuul:
   ignored-services: /* #排除服务,忽略服务真实名称
   ignored-patterns: /*/findall #排除指定路径 使用符号统配
   prefix: /ciel #访问前缀  #这种方式访问 http://127.0.0.1:3600/zuul/ciel/springcloud-consumer/consumer/fhf
+
+  ratelimit: #在高并发情况下，网关实现限流达到自我保护
+    enabled: true #开启限流
+    default-policy-list:   #这个配置的结构为 List<Policy> defaultPolicyList = Lists.newArrayList();
+      - limit: 10 #访问次数
+        quota: 30 #访问总时间
+        refresh-interval: 60 #时间间隔  # 即在时间间隔内 访问的次数 总时间小于 访问总时间 就会被限制
+        type:                       #在60s内访问10次，且十次访问在30s内，被限流，返回429错误
+          - origin #origin对ip进行限制 , url对资源进行限流 , user对用户进行限流;
+    repository: redis  #数据存储方式，默认为内存存储
+
+    policy-list:  #指定服务限流(局部限流)
+      springcloud-consumer: #被限流的服务名
+        - limit: 10
+          quota: 30
+          refresh-interval: 60
+          type:
+            - url
+
+#  /**
+#  hystrix的超时时间为1s，而ribbon为5s，假设请求在1s内没有处理完，就会timeout。
+#  我们将hystrix的超时时间调高，避免timeout。
+#  但ribbon的超时时间应该小于hystrix，在集群环境下，给充足的时间让ribbon调用集群中其他服务
+
+#    需要修改 consumer 端的超时配置
+#  */
+
+hystrix: #hystrix的超时时限
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+
+ribbon: #ribbon的超时时限
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
 
 #开启监控 也是为了zuul整合hystrix
 management:

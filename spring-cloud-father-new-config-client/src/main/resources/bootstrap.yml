@@ -1,0 +1,82 @@
+#  因为配置了配置中心，配置文件从配置中心读取，不能再使用applocation.properties/yml,配置项目名，端口号注册中心等 .
+#    必须在本地配置，所以这里使用优先级比application.properties/yml高的bootstrap.properties/yml文件
+server:
+  port: 3800
+  servlet:
+    context-path: /configclient
+
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 100
+    max-connections: 100
+    connection-timeout: 5000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: configclient-0-hystrix
+  client:
+    service-url:
+      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+spring:
+  application:
+    name: springcloud-configclient  #要和配置文件名称对应;springcloud-configclient-dev.yml
+  security:
+    user:
+      name: xia
+      password: 123
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  resources:
+    static-locations: classpath:/static/
+  profiles:
+    active: dev
+  aop:
+    proxy-target-class: true
+  redis:
+    host: 106.13.56.37
+    port: 6510
+    database: 1
+    password: ciel
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 2
+        max-active: 5
+        max-wait: 2000
+
+  cloud: #分布式配置
+    config:
+      discovery:
+        service-id: springcloud-config  #服务名称
+        enabled: true  #开启从配置中心读取配置
+      profile: dev #环境
+      label: master #主干
+      username: xia #bais 认证
+      password: 123 #bais 认证
+      #uri: http://127.0.0.1:3700/config/  #和service-id 二选一 不通过erueka,直接连接配置中心
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+spring:
+  profiles: dev #devģʽ
+logging:
+  config: classpath:logback-spring.xml
+
+
+
+
+
+

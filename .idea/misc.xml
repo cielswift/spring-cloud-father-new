@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-eureka1/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-eureka2/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-eureka0/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-producer0/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-sso/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-consumer0/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-producer1/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-turbines/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-cloud-father-new-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-father-new-config/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-father-new-config-client/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" project-jdk-name="13" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="13" project-jdk-type="JavaSDK" />
 </project>

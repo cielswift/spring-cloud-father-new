@@ -18,7 +18,6 @@ eureka:
 #   enable-self-preservation: false  #关闭自我保护:true 为开启自我保护，false 为关闭自我保护,清理掉已关闭的服务
 #   eviction-interval-timer-in-ms: 6000   #清理间隔(单位:毫秒，默认是60*1000)
 
-
 spring:
   application:
     name: springcloud-eureka

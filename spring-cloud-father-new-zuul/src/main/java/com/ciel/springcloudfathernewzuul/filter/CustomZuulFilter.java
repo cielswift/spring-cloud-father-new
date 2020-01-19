@@ -6,6 +6,7 @@ import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -24,6 +25,9 @@ public class CustomZuulFilter extends ZuulFilter {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     /**
      * 过滤逻辑
      * `请求前拦截, 如果无效直接断路;
@@ -32,28 +36,21 @@ public class CustomZuulFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
 
-
         RequestContext rc=RequestContext.getCurrentContext();
         HttpServletRequest req = rc.getRequest();
         String token = req.getParameter("token");
         if(StringUtils.isEmpty(token)) {
 
-
             redisTemplate.opsForValue().set("xiapeixin","ciel");
-            //throw new RuntimeException("未登录异常");
+            //throw new RuntimeException("未登录异常"); //抛出异常,然后捕获
 
 //            rc.setSendZuulResponse(false);//设置不向下传递，拦截不通过
 //            rc.setResponseStatusCode(401);
 //            rc.setResponseBody("未登录！！请先登录");
 //            rc.getResponse().setContentType("text/html;charset=utf-8");
-
-
-
         }else {
             log.info("已登录，通过过滤器！！！");
-
         }
-
         log.info("请求url为:",req.getMethod(),req.getRequestURL().toString() );
         return null;
     }

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud-father-new.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud-father-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-config/spring-cloud-father-new-config.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-config/spring-cloud-father-new-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-config-client/spring-cloud-father-new-config-client.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-config-client/spring-cloud-father-new-config-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-consumer0/spring-cloud-father-new-consumer0.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-consumer0/spring-cloud-father-new-consumer0.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-entity/spring-cloud-father-new-entity.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-entity/spring-cloud-father-new-entity.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-eureka0/spring-cloud-father-new-eureka0.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-eureka0/spring-cloud-father-new-eureka0.iml" />

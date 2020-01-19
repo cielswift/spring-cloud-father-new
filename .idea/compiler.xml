@@ -6,37 +6,41 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="spring-cloud-father-new-producer0" />
+        <module name="spring-cloud-father-new-sso" />
+        <module name="spring-cloud-father-new-eureka2" />
         <module name="spring-cloud-father-new-eureka1" />
         <module name="spring-cloud-father-new-eureka0" />
-        <module name="spring-cloud-father-new-genertor" />
-        <module name="spring-cloud-father-new-eureka2" />
-        <module name="spring-cloud-father-new-zuul" />
-        <module name="spring-cloud-father-new-sso" />
-        <module name="spring-cloud-father-new-producer0" />
-        <module name="spring-cloud-father-new-turbines" />
-        <module name="spring-cloud-father-new-producer1" />
-        <module name="spring-cloud-father-new-entity" />
-        <module name="spring-cloud-father-new-common" />
         <module name="spring-cloud-father-new-api" />
+        <module name="spring-cloud-father-new-entity" />
+        <module name="spring-cloud-father-new-producer1" />
+        <module name="spring-cloud-father-new-zuul" />
+        <module name="spring-cloud-father-new-config-client" />
+        <module name="spring-cloud-father-new-config" />
+        <module name="spring-cloud-father-new-common" />
+        <module name="spring-cloud-father-new-turbines" />
+        <module name="spring-cloud-father-new-genertor" />
         <module name="spring-cloud-father-new-consumer0" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spring-cloud-father-new" target="11" />
-      <module name="spring-cloud-father-new-api" target="11" />
-      <module name="spring-cloud-father-new-common" target="11" />
-      <module name="spring-cloud-father-new-consumer0" target="11" />
-      <module name="spring-cloud-father-new-entity" target="11" />
-      <module name="spring-cloud-father-new-eureka0" target="11" />
-      <module name="spring-cloud-father-new-eureka1" target="11" />
-      <module name="spring-cloud-father-new-eureka2" target="11" />
-      <module name="spring-cloud-father-new-genertor" target="11" />
-      <module name="spring-cloud-father-new-producer0" target="11" />
-      <module name="spring-cloud-father-new-producer1" target="11" />
-      <module name="spring-cloud-father-new-sso" target="11" />
+      <module name="spring-cloud-father-new" target="12" />
+      <module name="spring-cloud-father-new-api" target="12" />
+      <module name="spring-cloud-father-new-common" target="12" />
+      <module name="spring-cloud-father-new-config" target="12" />
+      <module name="spring-cloud-father-new-config-client" target="12" />
+      <module name="spring-cloud-father-new-consumer0" target="12" />
+      <module name="spring-cloud-father-new-entity" target="12" />
+      <module name="spring-cloud-father-new-eureka0" target="12" />
+      <module name="spring-cloud-father-new-eureka1" target="12" />
+      <module name="spring-cloud-father-new-eureka2" target="12" />
+      <module name="spring-cloud-father-new-genertor" target="12" />
+      <module name="spring-cloud-father-new-producer0" target="12" />
+      <module name="spring-cloud-father-new-producer1" target="12" />
+      <module name="spring-cloud-father-new-sso" target="12" />
       <module name="spring-cloud-father-new-turbine" target="12" />
-      <module name="spring-cloud-father-new-turbines" target="11" />
-      <module name="spring-cloud-father-new-zuul" target="11" />
+      <module name="spring-cloud-father-new-turbines" target="12" />
+      <module name="spring-cloud-father-new-zuul" target="12" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -44,6 +48,8 @@
       <module name="spring-cloud-father-new" options="-parameters" />
       <module name="spring-cloud-father-new-api" options="-parameters" />
       <module name="spring-cloud-father-new-common" options="-parameters" />
+      <module name="spring-cloud-father-new-config" options="-parameters" />
+      <module name="spring-cloud-father-new-config-client" options="-parameters" />
       <module name="spring-cloud-father-new-consumer0" options="-parameters" />
       <module name="spring-cloud-father-new-entity" options="-parameters" />
       <module name="spring-cloud-father-new-eureka0" options="-parameters" />

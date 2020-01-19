@@ -78,9 +78,17 @@ management:
       exposure:
         include: '*'
 
+hystrix: #hystrix的超时时限
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+
 ribbon: #Feign 的负载均衡底层用的就是 Ribbon;
-  ReadTimeout: 3000  #请求连接的超时时间 默认的时间为 1 秒
-  ConnectTimeout: 3000 #请求处理的超时时间
+  ReadTimeout: 5000  #请求连接的超时时间 默认的时间为 1 秒
+  ConnectTimeout: 5000 #请求处理的超时时间
 
 
 #根据服务名称进行局部超时配置
@@ -89,9 +97,8 @@ SPRINGCLOUD-PRODUCER: #服务名称
     OkToRetryOnAllOperations: true # 对所有操作请求都进行重试
     MaxAutoRetries: 2 # 对当前实例的重试次数
     MaxAutoRetriesNextServer:  0  #切换实例的重试次数
-    ConnectTimeout: 3000 # 请求连接的超时时间
-    ReadTimeout: 3000 # 请求处理的超时时间
-
+    ConnectTimeout: 5000 # 请求连接的超时时间
+    ReadTimeout: 5000 # 请求处理的超时时间
 
 #设置负载均衡策略 eureka-provider 为调用的服务的名称;一般不用这个而是在配置类中定义 @Bean public IRule ...
 #eureka-provider:

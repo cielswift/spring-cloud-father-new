@@ -10,15 +10,43 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.util.DigestUtils;
 
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class JwtUtil {
 
+
+    public static void main(String[] args) throws IOException {
+        String xiapeixin = createToken("xiapeixin");
+
+        System.out.println(xiapeixin);
+
+        String parseToken = parseToken(xiapeixin);
+
+        System.out.println(parseToken);
+
+    }
+
     protected static Algorithm algorithm = Algorithm.HMAC256("xia-pei#xin$202"); //密钥
 
     protected static int time = 60; //60分钟
+
+    /**
+     * 生产md5 摘要
+     * @param bytes
+     * @return
+     */
+
+    public static String md5(byte[] bytes){
+
+      //  byte[] bytes = Files.readAllBytes(Path.of("C:\\ciel\\spring-cloud-provider1\\log\\log_info.log"));
+        return DigestUtils.md5DigestAsHex(bytes);
+    }
 
     /**
      * 生成Token
