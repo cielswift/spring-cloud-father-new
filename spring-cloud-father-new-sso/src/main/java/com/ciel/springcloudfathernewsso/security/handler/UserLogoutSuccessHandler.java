@@ -1,5 +1,6 @@
 package com.ciel.springcloudfathernewsso.security.handler;
 
+import com.ciel.springcloudfathernewsso.security.jwt.JwtUtil;
 import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,9 +40,10 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
         resultData.put("msg", "登出成功");
         SecurityContextHolder.clearContext();
 
-//        redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token);
-//
-//        redisTemplate.delete("USER_".concat(user.getUsername())
+//        String token = request.getHeader("Authentication");
+//       String parseToken = JwtUtil.parseToken(token);
+
+//        redisTemplate.delete("USER_".concat(parseToken)
 
         ResultUtil.responseJson(response,ResultUtil.resultSuccess(resultData));
     }

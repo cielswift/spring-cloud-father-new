@@ -49,6 +49,17 @@ spring:
         min-idle: 2
         max-active: 5
         max-wait: 2000
+  rabbitmq:  #配合消息总线刷新
+    host: 127.0.0.1
+    port: 5672
+    username: ciel
+    password: c
+    virtual-host: /
+    listener:
+      simple:
+        retry:
+          enabled: true # 开启重试
+          max-attempts: 5 #重试次数
 
   cloud: #分布式配置
     config:
@@ -62,25 +73,31 @@ spring:
           # 访问方式 http://127.0.0.1:3700/config/client/dev
           skip-ssl-validation: true  #解决Cannot clone or checkout repository 的问题
 
-#使用非对称加密
-# keytool -genkeypair -alias "xia" -keyalg "RSA" -keystore "xiapeixin.key"
-encrypt:
-  key-store:
-    # keystore 文件的路径
-    location: classpath:xiapeixin.key
-    # alias 指定密钥对的别名，该别名是公开的;
-    alias: xia
-    # storepass 密钥仓库
-    password: xiapeixin
-    # keypass 用来保护所生成密钥对中的私钥
-    secret: xiapeixin
+    bus:  #使用消息总线刷新;#springboot 默认开启了权限拦截 会导致 /refresh 出现 401 ，拒绝访 问
+      enabled: true
+      refresh:
+        enabled: true
+
+##使用非对称加密
+## keytool -genkeypair -alias "xia" -keyalg "RSA" -keystore "xiapeixin.key"
+#encrypt:
+#  key-store:
+#    # keystore 文件的路径
+#    location: classpath:xiapeixin.key
+#    # alias 指定密钥对的别名，该别名是公开的;
+#    alias: xia
+#    # storepass 密钥仓库
+#    password: xiapeixin
+#    # keypass 用来保护所生成密钥对中的私钥
+#    secret: xiapeixin
 
 
+  #不能适用“*”，会冲突(消息总线刷新);
 management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: bus-refresh
 
 ---
 spring:

@@ -1,5 +1,6 @@
 package com.ciel.springcloudfathernewsso.security;
 
+import com.ciel.api.IUserService;
 import com.ciel.springcloudfathernewsso.security.filter.CustomAuthenticationFilter;
 import com.ciel.springcloudfathernewsso.security.filter.JWTAuthenticationTokenFilter;
 import com.ciel.springcloudfathernewsso.security.filter.JwtFilter;
@@ -10,8 +11,10 @@ import com.ciel.springcloudfathernewsso.security.token.UserAuthenticationProvide
 import com.ciel.springcloudfathernewsso.security.token.UserPermissionEvaluator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -24,6 +27,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
@@ -45,10 +49,16 @@ import java.util.Map;
  * @Author Sans
  * @CreateTime 2019/10/1 9:40
  */
-@Configuration
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //开启权限注解,默认是关闭的
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    /**
+     * securityd的过滤器执行链都在DefaultSecurityFilterChain中
+     *
+     * FilterSecurityInterceptor 授权过滤器
+     */
 
     /**
      * spring security的角色继承
@@ -58,12 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-
         String hierarchy = "ROLE_dba > ROLE_admin \n ROLE_admin > ROLE_user";
         roleHierarchy.setHierarchy(hierarchy);
         return roleHierarchy;
     }
-
 
     /**
      * 自定义登录成功处理器
@@ -143,7 +151,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 不进行权限验证的请求或资源(从配置文件中读取)
-                .antMatchers("/index,/login/**,/logout/**,/favicon.ico").permitAll()
+                .antMatchers("/login/**","/logout/**","/favicon.ico").permitAll()
                 // 其他的需要登陆后才能访问
                 .anyRequest().authenticated()
                 .and()
@@ -185,12 +193,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter out = response.getWriter();
-
+                    //未登录异常
                 Map<String, Object> resultData = new HashMap<>();
                 resultData.put("code", "5000");
-                resultData.put("msg", "访问失败!");
-
-                response.setHeader("Authentication", "token");
+                resultData.put("msg", "访问失败!::"+authException.getMessage());
 
                 out.write(new ObjectMapper().writeValueAsString(resultData));
                 out.flush();
@@ -205,60 +211,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 禁用缓存
         http.headers().cacheControl();
         // 添加JWT过滤器
-        http.addFilter(new JWTAuthenticationTokenFilter(authenticationManager()));
+        http.addFilter(jwtAuthenticationTokenFilter());
 
-
+        //登录过滤器
         http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-//        http.authorizeRequests()
-//                .antMatchers("/hello").hasRole("user")
-//                .antMatchers("/admin").hasRole("admin")
-//                .antMatchers(HttpMethod.POST, "/login").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .addFilterBefore(new JwtLoginFilter("/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterBefore(new JwtFilter(),UsernamePasswordAuthenticationFilter.class)
-//                .csrf().disable();
-
     }
+
+    @Autowired
+    @Qualifier("redisTemplateString")
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private IUserService userService;
 
     @Bean
     public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
 
         CustomAuthenticationFilter filter = new CustomAuthenticationFilter();
-
         filter.setAuthenticationManager(authenticationManagerBean());
-
-        filter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
-                Map<String, Object> resultData = new HashMap<>();
-                resultData.put("code", "2000");
-                resultData.put("msg", "登录++成功");
-
-                response.setHeader("Authentication", "token");
-
-                ResultUtil.responseJson(response, resultData);
-            }
-        });
-
-        filter.setAuthenticationFailureHandler(new AuthenticationFailureHandler() {
-            @Override
-            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-
-                Map<String, Object> resultData = new HashMap<>();
-                resultData.put("code", "3000");
-                resultData.put("msg", "登录++失败");
-
-                response.setHeader("Authentication", "token");
-
-                ResultUtil.responseJson(response, resultData);
-            }
-        });
-
-
+        filter.setRedisTemplate(redisTemplate);
+        filter.setUserService(userService);
         return filter;
+    }
+
+    @Bean
+    public JWTAuthenticationTokenFilter jwtAuthenticationTokenFilter() throws Exception {
+        JWTAuthenticationTokenFilter tokenFilter = new JWTAuthenticationTokenFilter(authenticationManager());
+        tokenFilter.setRedisTemplate(redisTemplate);
+        tokenFilter.setUserService(userService);
+        return tokenFilter;
     }
 
 }

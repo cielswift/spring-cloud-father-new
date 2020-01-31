@@ -51,6 +51,17 @@ spring:
         min-idle: 2
         max-active: 5
         max-wait: 2000
+  rabbitmq:  #配合消息总线刷新
+    host: 127.0.0.1
+    port: 5672
+    username: ciel
+    password: c
+    virtual-host: /
+    listener:
+      simple:
+        retry:
+          enabled: true # 开启重试
+          max-attempts: 5 #重试次数
 
   cloud: #分布式配置
     config:

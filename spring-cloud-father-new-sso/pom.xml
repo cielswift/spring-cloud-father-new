@@ -22,7 +22,12 @@
 
     <dependencies>
 
-        <dependency> <!--web 启动-->
+        <dependency> <!--整合ouath2-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
+        <dependency> <!-- web启动-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

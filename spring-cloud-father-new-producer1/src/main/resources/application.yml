@@ -46,7 +46,7 @@ spring:
   aop:
     proxy-target-class: true #使用cglib代理
   redis:   #redis配置
-    host: 106.13.56.37
+    host: 127.0.0.1
     port: 6510
     database: 1
     password: ciel
@@ -56,6 +56,8 @@ spring:
         min-idle: 2
         max-active: 5
         max-wait: 2000
+  main:
+    allow-bean-definition-overriding: true #允许覆盖spring的bean ;整合oauth2 用到
 
 #  shardingsphere:  #分库分表
 #    dataSources:

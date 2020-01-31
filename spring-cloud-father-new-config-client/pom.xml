@@ -22,7 +22,17 @@
 
     <dependencies>
 
-        <!-- bus-amqp 消息总线 -->
+        <dependency><!--定时任务-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <dependency> <!--构建消息驱动微服务应用的框架-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+
+        <!-- bus-amqp 消息总线 通过消息总线刷新配置-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>

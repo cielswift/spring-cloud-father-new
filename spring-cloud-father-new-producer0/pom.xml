@@ -37,6 +37,11 @@
 <!--        </dependency>-->
 
 
+        <dependency> <!--整合ouath2-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
         <!-- 可视化数据监控dashboard ,针对 Hystrix 进行实时监控的工具-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

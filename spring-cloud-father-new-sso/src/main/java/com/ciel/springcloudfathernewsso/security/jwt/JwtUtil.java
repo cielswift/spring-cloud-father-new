@@ -16,11 +16,11 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 public class JwtUtil {
-
-
     public static void main(String[] args) throws IOException {
         String xiapeixin = createToken("xiapeixin");
 
@@ -29,10 +29,9 @@ public class JwtUtil {
         String parseToken = parseToken(xiapeixin);
 
         System.out.println(parseToken);
-
     }
 
-    protected static Algorithm algorithm = Algorithm.HMAC256("xia-pei#xin$202"); //密钥
+    protected static Algorithm algorithm = Algorithm.HMAC256("^x?ia-pe=i#xi&n!20_2$"); //密钥
 
     protected static int time = 60; //60分钟
 
@@ -52,7 +51,9 @@ public class JwtUtil {
      * 生成Token
      * 
      * JWT分成3部分：1.头部（header),2.载荷（payload, 类似于飞机上承载的物品)，3.签证（signature)
-     * 
+     *
+     * header 和payload 都是明文的;可以被解密; 主要看signature;
+     *
      * 加密后这3部分密文的字符位数为：
      *  1.头部（header)：36位，Base64编码 
      *  2.载荷（payload)：没准，BASE64编码
@@ -82,6 +83,7 @@ public class JwtUtil {
             return token;
     }
 
+
     /**
      * 解析token
      * @param token
@@ -90,13 +92,9 @@ public class JwtUtil {
 
     public static String parseToken(String token){
 
-        JWTVerifier verifier = JWT.require(algorithm) //验证
-                .withIssuer("sso_server")
-                .build();
-
         DecodedJWT jwt = null;
         try {
-             jwt = verifier.verify(token); //获取值
+            jwt =  commonParse(token); //获取值
         }catch (TokenExpiredException exception){
             throw new RuntimeException("token已过期");
         }catch (Exception exception){
@@ -109,6 +107,57 @@ public class JwtUtil {
 
         Claim body = claims.get("body");
         return body.asString();
+    }
+
+    /**
+     * 获取token创建时间
+     * @return
+     */
+    public static LocalDateTime getTokenCreateTime(String token){
+        DecodedJWT jwt = null;
+        try {
+            jwt =  commonParse(token); //获取值
+        }catch (TokenExpiredException exception){
+            throw new RuntimeException("token已过期");
+        }catch (Exception exception){
+            throw new RuntimeException("解析异常");
+        }
+
+        Date issuedAt = jwt.getIssuedAt();
+        return issuedAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /**
+     *token 是否需要刷新
+     */
+    public static boolean isRefresh(String token,int second){
+        DecodedJWT jwt = null;
+        try {
+            jwt =  commonParse(token); //获取值
+        }catch (TokenExpiredException exception){
+            throw new RuntimeException("token已过期");
+        }catch (Exception exception){
+            throw new RuntimeException("解析异常");
+        }
+
+        LocalDateTime create =
+                jwt.getIssuedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+        LocalDateTime refreshPoint = create.plusSeconds(second); //刷新点
+
+        return LocalDateTime.now().isAfter(refreshPoint);
+    }
+
+    /**
+     * 公共解析部分
+     */
+    private static DecodedJWT commonParse(String token){
+        JWTVerifier verifier = JWT.require(algorithm) //验证
+                .withIssuer("sso_server")
+                .build();
+        DecodedJWT jwt = null;
+        jwt = verifier.verify(token); //获取值
+        return jwt;
     }
 
 }

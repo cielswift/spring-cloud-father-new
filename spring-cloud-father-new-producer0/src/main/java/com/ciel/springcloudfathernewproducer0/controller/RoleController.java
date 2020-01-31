@@ -4,6 +4,7 @@ import com.ciel.api.IRoleService;
 import com.ciel.entity.Role;
 import com.ciel.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

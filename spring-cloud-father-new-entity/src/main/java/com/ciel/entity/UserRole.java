@@ -8,9 +8,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
  *
  * @author xiapeixin
  * @since 2020-01-10

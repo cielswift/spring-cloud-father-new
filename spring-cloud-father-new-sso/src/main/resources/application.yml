@@ -40,7 +40,7 @@ spring:
     active: dev #激活dev模式
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql.ciel.cl:1600/scfn?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql.ciel.cl:1600/ds0?seUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: ciel
     type: com.alibaba.druid.pool.DruidDataSource
@@ -53,7 +53,7 @@ spring:
   aop:
     proxy-target-class: true #使用cglib代理
   redis:   #redis配置
-    host: 106.13.56.37
+    host: 127.0.0.1
     port: 6510
     database: 1
     password: ciel

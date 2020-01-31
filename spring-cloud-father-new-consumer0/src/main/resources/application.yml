@@ -78,7 +78,15 @@ management:
       exposure:
         include: '*'
 
-hystrix: #hystrix的超时时限
+#  /**
+#  hystrix的超时时间为1s，而ribbon为5s，假设请求在1s内没有处理完，就会timeout。
+#  我们将hystrix的超时时间调高，避免timeout。
+#  但ribbon的超时时间应该小于hystrix，在集群环境下，给充足的时间让ribbon调用集群中其他服务
+
+#    需要修改 consumer 端的超时配置
+#  */
+
+hystrix: #hystrix的超时时限,要大于ribbon
   command:
     default:
       execution:

@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
@@ -27,6 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableHystrix //hystrix 服务监控
 @EnableHystrixDashboard //hystrixDashboard 服务监控
 
+//@EnableAuthorizationServer //整合oauth2
 public class SpringCloudFatherNewProducer0Application {
 
     public static void main(String[] args) {

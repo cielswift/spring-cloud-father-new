@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <!-- bus-amqp:整合了所有的mq 这里测试消息总线-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
 
         <!-- 配置中心server -->
         <dependency>

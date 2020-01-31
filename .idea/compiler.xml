@@ -15,11 +15,13 @@
         <module name="spring-cloud-father-new-entity" />
         <module name="spring-cloud-father-new-producer1" />
         <module name="spring-cloud-father-new-zuul" />
+        <module name="spring-cloud-father-new-webflux" />
         <module name="spring-cloud-father-new-config-client" />
         <module name="spring-cloud-father-new-config" />
         <module name="spring-cloud-father-new-common" />
         <module name="spring-cloud-father-new-turbines" />
         <module name="spring-cloud-father-new-genertor" />
+        <module name="spring-cloud-new-father-kotlin" />
         <module name="spring-cloud-father-new-consumer0" />
       </profile>
     </annotationProcessing>
@@ -40,7 +42,9 @@
       <module name="spring-cloud-father-new-sso" target="12" />
       <module name="spring-cloud-father-new-turbine" target="12" />
       <module name="spring-cloud-father-new-turbines" target="12" />
+      <module name="spring-cloud-father-new-webflux" target="12" />
       <module name="spring-cloud-father-new-zuul" target="12" />
+      <module name="spring-cloud-new-father-kotlin" target="12" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -61,7 +65,9 @@
       <module name="spring-cloud-father-new-sso" options="-parameters" />
       <module name="spring-cloud-father-new-turbine" options="-parameters" />
       <module name="spring-cloud-father-new-turbines" options="-parameters" />
+      <module name="spring-cloud-father-new-webflux" options="-parameters" />
       <module name="spring-cloud-father-new-zuul" options="-parameters" />
+      <module name="spring-cloud-new-father-kotlin" options="-parameters" />
     </option>
   </component>
 </project>

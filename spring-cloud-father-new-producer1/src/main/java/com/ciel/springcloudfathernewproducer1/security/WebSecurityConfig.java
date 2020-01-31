@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -42,6 +43,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/**");
     }
 
+    /**
+     * 获取manager
+     */
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean(){
+        return authenticationManagerBean();
+    }
 
     /**
      * 配置security的控制逻辑
@@ -80,4 +89,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     }
+
+
 }

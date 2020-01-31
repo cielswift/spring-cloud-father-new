@@ -13,11 +13,6 @@ import java.util.Map;
 @RestController
 public class HomeController {
 
-    @PostMapping("/login")
-    public Map login(HttpServletRequest request, HttpServletResponse response){
-
-        return Map.of("name","login");
-    }
 
     @GetMapping("/")
     @PreAuthorize("hasRole('admin') and hasPermission('/','sys_add')")
@@ -26,7 +21,7 @@ public class HomeController {
     }
 
     @GetMapping("/say")
-    @PreAuthorize("hasAnyAuthority('sys_add' , 'sys_del')")
+    @PreAuthorize("hasAnyAuthority('sys_ngngngng' , 'sys_sasasasa')")
     public Map say(){
         return Map.of("name","say");
     }
@@ -38,4 +33,6 @@ public class HomeController {
     }
 
     //SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
+
+
 }

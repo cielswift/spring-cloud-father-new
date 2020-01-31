@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- * 
- * </p>
  *
  * @author xiapeixin
  * @since 2020-01-15

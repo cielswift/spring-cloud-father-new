@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description 登录成功处理类
@@ -62,7 +63,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         String value = format.writeValueAsString(user_info);
 
         String token = JwtUtil.createToken(value);
-        redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token);
+        redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token,1, TimeUnit.HOURS);
 
         Map<String,Object> resultData = new HashMap<>();
         resultData.put("code","200");

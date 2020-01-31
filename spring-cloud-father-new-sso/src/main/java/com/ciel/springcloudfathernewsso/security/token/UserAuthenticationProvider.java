@@ -8,15 +8,10 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 自定义登录验证
@@ -27,7 +22,7 @@ import java.util.Set;
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private UserDetailService userDetailService;
+    private CustomUserDetailService userDetailService;
 
     @Autowired
     private IUserService userService;
@@ -55,6 +50,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         if (!userDetails.isEnabled()){
             throw new LockedException("该用户已被冻结");
         }
+
         // 进行登录
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
