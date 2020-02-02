@@ -20,14 +20,36 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableResourceServer //整合oauth2
-public class ResourcesServer extends ResourceServerConfigurerAdapter {
+public class OAuth2ResourcesServer extends ResourceServerConfigurerAdapter {
 
     /**
+     *jdbc
+     * * ------------------------------------------------------------------
+     *       校验检查token
+     *
+     *      post http://127.0.0.1:3400/sso/oauth/check_token?token=fdc042f0-5a93-4dd5-be3e-5ef35d562d16
+     *       {
+     *           "aud": [
+     *               "springcloud-producer"
+     *          ],
+     *           "user_name": "xiapeixin",
+     *           "scope": [
+     *               "read",
+     *               "write"
+     *           ],
+     *           "active": true,
+     *          "exp": 1580625060,
+     *           "authorities": [
+     *               "ROLE_admin",   //权限
+     *               "sys_add"
+     *           ],
+     *           "client_id": "xiapeixin"
+     *       }
      * 资源服务器
      *
      * get http://127.0.0.1:3200/producer/user/list
      *
-     *  需要在header中带上Authorization = Bearer c48f286d-a65a-455b-9bf6-01d0757bf186  (授权码)
+     *  需要在header中带上Authorization = Bearer c48f286d-a65a-455b-9bf6-01d0757bf186  (token)
      *  以及Authentication = eyJ0eXAiOiJKV.... (自定义的jwt,登录需要用到)
      *
      */

@@ -87,7 +87,7 @@
             <version>3.9.0</version>
         </dependency>
 
-        <dependency><!--安全-->
+        <dependency><!--security 权限登录-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
