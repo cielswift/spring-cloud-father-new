@@ -1,4 +1,4 @@
-package com.ciel.springcloudfathernewsso.security.token;
+package com.ciel.common.tokenSecurity.token;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,4 +1,4 @@
-package com.ciel.springcloudfathernewsso.security.jwt;
+package com.ciel.common.util;
 
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;

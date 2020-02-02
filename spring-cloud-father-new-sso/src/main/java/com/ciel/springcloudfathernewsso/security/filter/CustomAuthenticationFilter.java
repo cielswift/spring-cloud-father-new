@@ -1,18 +1,15 @@
 package com.ciel.springcloudfathernewsso.security.filter;
 
 import com.ciel.api.IUserService;
-import com.ciel.springcloudfathernewsso.security.jwt.JwtUtil;
-import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
+import com.ciel.common.util.JwtUtil;
+import com.ciel.common.util.ResultUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;

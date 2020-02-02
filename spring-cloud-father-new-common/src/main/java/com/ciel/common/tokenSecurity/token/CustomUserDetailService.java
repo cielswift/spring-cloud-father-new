@@ -1,4 +1,4 @@
-package com.ciel.springcloudfathernewsso.security.token;
+package com.ciel.common.tokenSecurity.token;
 
 import com.ciel.api.IRoleService;
 import com.ciel.api.IUserService;

@@ -1,7 +1,6 @@
-package com.ciel.springcloudfathernewsso.security.handler;
+package com.ciel.common.tokenSecurity.handler;
 
-
-import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
+import com.ciel.common.util.ResultUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

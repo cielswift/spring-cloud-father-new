@@ -26,9 +26,9 @@ public class MainController {
      * @InitBinder标注的方法, 方法入参和 @RequestMapping方法入参可选范围一样,比如HttpServletRequest、ModelMap这些;
      * 通常一个入参 WebDataBinder 就够我们使用了
      *
-     * @InitBinder标注的方法返回值, 必须为nul
+     * @InitBinder 标注的方法返回值, 必须为nul
      *
-     * @InitBinder标注的方法执行是多次的，一次请求来就执行一次。
+     * @InitBinder 标注的方法执行是多次的，一次请求来就执行一次。 用于对参数进行预修改;
      */
     @InitBinder
     public void init(WebDataBinder binder,HttpServletRequest request){

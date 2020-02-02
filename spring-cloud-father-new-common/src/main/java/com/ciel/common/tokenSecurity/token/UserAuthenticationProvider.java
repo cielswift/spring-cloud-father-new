@@ -1,4 +1,4 @@
-package com.ciel.springcloudfathernewsso.security.token;
+package com.ciel.common.tokenSecurity.token;
 
 import com.ciel.api.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,15 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private IUserService userService;
+
+    /**
+     * 是否支持这个 Authentication 针对什么样的认证进行校验; 原本是UsernamePasswordAuthenticationToken;
+     */
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return true;
+    }
+
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -55,13 +64,4 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
 
-    /**
-     * 是否支持这个 Authentication
-     * @param authentication
-     * @return
-     */
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return true;
-    }
 }

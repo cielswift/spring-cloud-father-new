@@ -13,11 +13,10 @@ import java.util.Map;
 @RestController
 public class HomeController {
 
-
     @GetMapping("/")
     @PreAuthorize("hasRole('admin') and hasPermission('/','sys_add')")
     public Map index(){
-        return Map.of("name","xiapeixin");
+        return Map.of("MSG","单点登录服务器");
     }
 
     @GetMapping("/say")

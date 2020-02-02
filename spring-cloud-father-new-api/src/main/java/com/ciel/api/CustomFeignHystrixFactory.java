@@ -9,6 +9,12 @@ import java.util.List;
 @RequestMapping("/feignHystrixFactory")
 public interface CustomFeignHystrixFactory {
 
+    /**
+     * feign 请求携带一个头
+     */
+   // @GetMapping(value = "/fhf",headers = "Authentication=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e")
+
+
     @GetMapping("/fhf")
     public List<User> fhf() throws InterruptedException;
 }

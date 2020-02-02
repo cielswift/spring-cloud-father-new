@@ -1,8 +1,8 @@
-package com.ciel.springcloudfathernewsso.security.handler;
+package com.ciel.common.tokenSecurity.handler;
 
 import com.ciel.api.IUserService;
-import com.ciel.springcloudfathernewsso.security.jwt.JwtUtil;
-import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
+import com.ciel.common.util.JwtUtil;
+import com.ciel.common.util.ResultUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

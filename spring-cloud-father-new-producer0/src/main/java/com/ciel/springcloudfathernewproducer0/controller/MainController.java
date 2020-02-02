@@ -10,6 +10,6 @@ public class MainController {
 
     @GetMapping("/")
     public Object index(){
-        return Map.of("name","producer0");
+        return Map.of("MSG","通过其他微服务调用");
     }
 }

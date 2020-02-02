@@ -1,7 +1,7 @@
-package com.ciel.springcloudfathernewsso.security.handler;
+package com.ciel.common.tokenSecurity.handler;
 
-import com.ciel.springcloudfathernewsso.security.jwt.JwtUtil;
-import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
+
+import com.ciel.common.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,8 +30,6 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
     /**
      * 用户登出返回结果
      * 这里应该让前端清除掉Token
-     * @Author Sans
-     * @CreateTime 2019/10/3 9:50
      */
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){

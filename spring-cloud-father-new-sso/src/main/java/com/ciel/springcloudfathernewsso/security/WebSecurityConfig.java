@@ -1,23 +1,19 @@
 package com.ciel.springcloudfathernewsso.security;
 
 import com.ciel.api.IUserService;
+import com.ciel.common.tokenSecurity.handler.*;
+import com.ciel.common.tokenSecurity.token.UserAuthenticationProvider;
+import com.ciel.common.tokenSecurity.token.UserPermissionEvaluator;
 import com.ciel.springcloudfathernewsso.security.filter.CustomAuthenticationFilter;
 import com.ciel.springcloudfathernewsso.security.filter.JWTAuthenticationTokenFilter;
-import com.ciel.springcloudfathernewsso.security.filter.JwtFilter;
-import com.ciel.springcloudfathernewsso.security.filter.JwtLoginFilter;
-import com.ciel.springcloudfathernewsso.security.handler.*;
-import com.ciel.springcloudfathernewsso.security.jwt.ResultUtil;
-import com.ciel.springcloudfathernewsso.security.token.UserAuthenticationProvider;
-import com.ciel.springcloudfathernewsso.security.token.UserPermissionEvaluator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,14 +21,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.ServletException;
@@ -46,8 +38,6 @@ import java.util.Map;
 /**
  * SpringSecurity配置类
  *
- * @Author Sans
- * @CreateTime 2019/10/1 9:40
  */
 
 @EnableWebSecurity
@@ -141,6 +131,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 获取manager,整合oauth2需要这个对象
+     */
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    /**
      * 配置security的控制逻辑
      *
      * @Author Sans
@@ -189,7 +188,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
             @Override
-            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            public void commence(HttpServletRequest request, HttpServletResponse response,
+                                 AuthenticationException authException) throws IOException, ServletException {
 
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter out = response.getWriter();
