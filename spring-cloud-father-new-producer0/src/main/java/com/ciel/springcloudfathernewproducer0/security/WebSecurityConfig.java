@@ -51,10 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-//    @Override //不经过security的过滤器
-//    public void configure(WebSecurity web) throws Exception {
-//       // web.ignoring().antMatchers("/**");
-//    }
+    @Override //不经过security的过滤器
+    public void configure(WebSecurity web) throws Exception {
+       // web.ignoring().antMatchers("/**");
+    }
 
 
     /**

@@ -44,7 +44,7 @@ public class JWTAuthenticationTokenFilter extends BasicAuthenticationFilter {
     /**
      * token 刷新间隔 秒;
      */
-    private int refreshTime =  30 * 60;
+    private final int refreshTime = 10800 ; //3小时
 
     /**
      *是否登录
@@ -121,7 +121,7 @@ public class JWTAuthenticationTokenFilter extends BasicAuthenticationFilter {
                     String value2 = format2.writeValueAsString(user_info);
 
                     String token2 = JwtUtil.createToken(value2);
-                    redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token2,1, TimeUnit.HOURS);
+                    redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token2,JwtUtil.time, TimeUnit.SECONDS);
 
                     response.setHeader("Authentication",token2);
                 }

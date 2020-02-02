@@ -29,7 +29,10 @@ public class JwtUtil {
 
     protected static Algorithm algorithm = Algorithm.HMAC256("^x?ia-pe=i#xi&n!20_2$"); //密钥
 
-    protected static int time = 60; //60分钟
+    /**
+     * token保存时间 秒
+     */
+    public static final int time = 21600 ; // 6小时
 
     /**
      * 生产md5 摘要
@@ -73,7 +76,7 @@ public class JwtUtil {
                 // .withNotBefore(new Date())//定义在什么时间之前，该jwt都是不可用的
                 .withAudience("user")// 签名的观众 也可以理解谁接受签名的
                 .withIssuedAt(new Date()) // 生成签名的时间
-                .withExpiresAt(new Date(System.currentTimeMillis()+1000*60*time))
+                .withExpiresAt(new Date(System.currentTimeMillis()+(1000*time)))
                 /* 签名 Signature */
                 .sign(algorithm);
             return token;

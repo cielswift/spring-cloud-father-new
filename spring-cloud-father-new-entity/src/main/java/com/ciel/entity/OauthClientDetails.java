@@ -55,7 +55,7 @@ public class OauthClientDetails implements Serializable {
     private String authorities;
 
     /**
-     * 有效时间
+     * 有效时间 token 过期时间 单位秒
      */
     private Integer accessTokenValidity;
     /**

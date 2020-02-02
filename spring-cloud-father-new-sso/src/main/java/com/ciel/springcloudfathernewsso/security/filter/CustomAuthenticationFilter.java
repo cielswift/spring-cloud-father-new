@@ -30,7 +30,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
      * 登录请求会走这个过滤器
      */
 
-
     public CustomAuthenticationFilter(){
 
         this.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
@@ -121,7 +120,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String value = format.writeValueAsString(user_info);
 
         String token = JwtUtil.createToken(value);
-        redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token,1, TimeUnit.HOURS);
+        redisTemplate.opsForValue().set("USER_".concat(user.getUsername()),token,JwtUtil.time, TimeUnit.SECONDS);
 
         Map<String,Object> resultData = new HashMap<>();
         resultData.put("code","200");

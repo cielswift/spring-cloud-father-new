@@ -28,17 +28,16 @@ public class Oauth2Server extends AuthorizationServerConfigurerAdapter {
 
     /**
      * 授权服务器
-     * 1: get
-     * http://127.0.0.1:3400/sso/oauth/authorize?client_id=xiapeixin&response_type=code&redirect_uri=https://www.baidu.com/&Authentication=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqd3RfdG9rZW4iLCJhdWQiOiJ1c2VyIiwiaXNzIjoic3NvX3NlcnZlciIsImJvZHkiOiJ7XCJwYXNzd29yZFwiOlwiJDJhJDEwJGJiSVZ0OWRuRWFremhYM1FNcDZSTHVvY0ZDeGo0UUJ2NWVmMWUxV0lTMUQuRGF0RnZGRW5HXCIsXCJhdXRob3JpdGVzXCI6W3tcImF1dGhvcml0eVwiOlwiUk9MRV9hZG1pblwifSx7XCJhdXRob3JpdHlcIjpcInN5c19hZGRcIn1dLFwibmFtZVwiOlwieGlhcGVpeGluXCIsXCJpZFwiOjE1Nzk4OTMwMzYzNzIsXCJ1c2VybmFtZVwiOlwieGlhcGVpeGluXCJ9IiwiZXhwIjoxNTgwNTUwODI1LCJpYXQiOjE1ODA1NDcyMjV9.lipMY0buGfdxJBJOkGEMM-7lGctlDTTDs7uFmR36feM
+     *
+     * get http://127.0.0.1:3400/sso/oauth/authorize?client_id=xiapeixin&response_type=code&redirect_uri=https://www.baidu.com/&Authentication=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqd3RfdG9rZW4iLCJhdWQiOiJ1c2VyIiwiaXNzIjoic3NvX3NlcnZlciIsImJvZHkiOiJ7XCJwYXNzd29yZFwiOlwiJDJhJDEwJGJiSVZ0OWRuRWFremhYM1FNcDZSTHVvY0ZDeGo0UUJ2NWVmMWUxV0lTMUQuRGF0RnZGRW5HXCIsXCJhdXRob3JpdGVzXCI6W3tcImF1dGhvcml0eVwiOlwiUk9MRV9hZG1pblwifSx7XCJhdXRob3JpdHlcIjpcInN5c19hZGRcIn1dLFwibmFtZVwiOlwieGlhcGVpeGluXCIsXCJpZFwiOjE1Nzk4OTMwMzYzNzIsXCJ1c2VybmFtZVwiOlwieGlhcGVpeGluXCJ9IiwiZXhwIjoxNTgwNTUwODI1LCJpYXQiOjE1ODA1NDcyMjV9.lipMY0buGfdxJBJOkGEMM-7lGctlDTTDs7uFmR36feM
      *
      * 会跳转到edirect_uri, 并携带授权码ttps://www.baidu.com/?code=JGMS3h
      * 注意: 从页面上点击Authorize不带token 需要自己debug添加;
      *
      * 拿到授权码后
      *
-     * 2: post
      *
-     * http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=authorization_code&code=8wyYdK&redirect_uri=https://www.baidu.com/
+     * post http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=authorization_code&code=8wyYdK&redirect_uri=https://www.baidu.com/
      *
      * 由于这里单点登录服务器和oauth2认证服务器在一台服务器上,因此要求:client_id=xiapeixin client_secret=123456
      *        客户端id 和密码 等于 用户 密码
@@ -57,7 +56,7 @@ public class Oauth2Server extends AuthorizationServerConfigurerAdapter {
      *-------------------------------------------------------------------------------------------
      * 简化模式
      *
-     * http://127.0.0.1:3400/sso/oauth/authorize?client_id=xiapeixin&response_type=token&redirect_uri=https://www.baidu.com/
+     * post http://127.0.0.1:3400/sso/oauth/authorize?client_id=xiapeixin&response_type=token&redirect_uri=https://www.baidu.com/
      *
      * response_type=token
      *
@@ -66,7 +65,7 @@ public class Oauth2Server extends AuthorizationServerConfigurerAdapter {
      *--------------------------------------------------------------------------------------------------
      * 密码模式
      *
-     * http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=password&code=EmcDVt&redirect_uri=https://www.baidu.com&username=xiapeixin&password=123456
+     * post http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=password&code=EmcDVt&redirect_uri=https://www.baidu.com&username=xiapeixin&password=123456
      *
      * grant_type=password
      *
@@ -81,7 +80,7 @@ public class Oauth2Server extends AuthorizationServerConfigurerAdapter {
      * ---------------------------------------------------------------------------------------------------------
      * 客户端模式
      *
-     * http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=client_credentials&code=EmcDVt&redirect_uri=https://www.baidu.com&username=xiapeixin&password=123456
+     * post http://127.0.0.1:3400/sso/oauth/token?client_id=xiapeixin&client_secret=123456&grant_type=client_credentials&code=EmcDVt&redirect_uri=https://www.baidu.com&username=xiapeixin&password=123456
      *
      * grant_type=client_credentials
      *
@@ -90,6 +89,29 @@ public class Oauth2Server extends AuthorizationServerConfigurerAdapter {
      *     "token_type": "bearer",
      *     "expires_in": 29,
      *     "scope": "read write"
+     * }
+     *
+     * ------------------------------------------------------------------
+     * 检查token
+     *
+     * post http://127.0.0.1:3400/sso/oauth/check_token?token=fdc042f0-5a93-4dd5-be3e-5ef35d562d16
+     *
+     * {
+     *     "aud": [
+     *         "springcloud-producer"
+     *     ],
+     *     "user_name": "xiapeixin",
+     *     "scope": [
+     *         "read",
+     *         "write"
+     *     ],
+     *     "active": true,
+     *     "exp": 1580625060,
+     *     "authorities": [
+     *         "ROLE_admin",
+     *         "sys_add"
+     *     ],
+     *     "client_id": "xiapeixin"
      * }
      */
 
