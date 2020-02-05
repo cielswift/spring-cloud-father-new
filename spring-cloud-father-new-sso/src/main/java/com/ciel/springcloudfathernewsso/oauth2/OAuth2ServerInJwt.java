@@ -9,7 +9,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
@@ -70,6 +74,22 @@ public class OAuth2ServerInJwt extends AuthorizationServerConfigurerAdapter {
         return new JdbcClientDetailsService(dataSource);
     }
 
+    /**
+     *授权码模式存储策略
+     */
+    @Bean
+    public AuthorizationCodeServices authorizationCodeServices(){
+        return new JdbcAuthorizationCodeServices(dataSource);
+    }
+
+    /**
+     授权信息保存策略
+     */
+    @Bean
+    public ApprovalStore approvalStore(){
+        return new JdbcApprovalStore(dataSource);
+    }
+
     @Bean
     public AuthorizationServerTokenServices tokenServices(){
 
@@ -89,12 +109,13 @@ public class OAuth2ServerInJwt extends AuthorizationServerConfigurerAdapter {
         return tokenServices;
     }
 
+    /**
+     *客户端保存策略
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
        clients.withClientDetails(jdbcClientDetailsService());
     }
-
-
 
     /**
      * 检测token的策略

@@ -1,5 +1,8 @@
 package com.ciel.springcloudfathernewconsumer0.controller;
 
+import com.ciel.entity.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,6 +53,14 @@ public class GlobalController implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> aClass,
                                   ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
-        return Map.of("MSG","统一返回格式添加","BODY",response.toString());
+       // return Map.of("MSG","统一返回格式添加","BODY",String.valueOf(response));
+
+        Map<String, String> body = Map.of("MSG", "统一返回格式添加", "BODY", String.valueOf(response));
+
+        try {
+            return new ObjectMapper().writeValueAsString(body).replace("\\","");
+        } catch (JsonProcessingException e) {
+            return "{'MSG':'数据转化错误'}";
+        }
     }
 }

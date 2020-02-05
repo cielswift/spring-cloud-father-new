@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -35,8 +38,14 @@ public class CustomZuulFilter extends ZuulFilter {
      */
     @Override
     public Object run() throws ZuulException {
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        RequestContext rc=RequestContext.getCurrentContext(); //获取当前请求
 
-        RequestContext rc=RequestContext.getCurrentContext();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication instanceof OAuth2Authentication){
+
+        }
+
         HttpServletRequest req = rc.getRequest();
         String token = req.getParameter("token");
         if(StringUtils.isEmpty(token)) {
@@ -83,7 +92,7 @@ public class CustomZuulFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        // TODO Auto-generated method stub
+
         return "pre";
     }
 

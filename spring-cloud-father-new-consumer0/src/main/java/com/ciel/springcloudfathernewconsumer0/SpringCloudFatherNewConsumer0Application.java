@@ -70,8 +70,8 @@ public class SpringCloudFatherNewConsumer0Application {
         //   return new RestTemplate();
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors()
-                .add(new BasicAuthenticationInterceptor("xia", "123", StandardCharsets.UTF_8));
+//        restTemplate.getInterceptors()
+//                .add(new BasicAuthenticationInterceptor("xia", "123", StandardCharsets.UTF_8));
 
         List<HttpMessageConverter<?>> list = restTemplate.getMessageConverters();
         for (HttpMessageConverter<?> httpMessageConverter : list) {

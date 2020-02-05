@@ -39,7 +39,6 @@ public class SpringCloudFatherNewZuulApplication {
         SpringApplication.run(SpringCloudFatherNewZuulApplication.class, args);
     }
 
-
     @Bean
     @Primary
     public RedisTemplate redisTemplateJSON(RedisConnectionFactory redisConnectionFactory){

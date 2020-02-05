@@ -35,7 +35,7 @@ public class OauthClientDetails implements Serializable {
     private String clientSecret;
 
     /**
-     * 访问哪些资源的哪些权限,read,write
+     * 访问哪些资源的哪些scope,read,write; 会先判断这个,任何判断权限;
      */
     private String scope;
 

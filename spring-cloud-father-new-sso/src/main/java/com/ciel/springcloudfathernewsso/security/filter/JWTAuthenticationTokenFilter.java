@@ -134,7 +134,7 @@ public class JWTAuthenticationTokenFilter extends BasicAuthenticationFilter {
             }
         }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response); //继续向下一个过滤器执行
         return;
     }
 
