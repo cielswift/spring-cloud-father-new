@@ -1,0 +1,76 @@
+server:
+  port: 4013
+  servlet:
+    context-path: /zuul
+spring:
+  application:
+    name: zuul
+
+#  cloud:
+#    consul:
+#      host: 127.0.0.1  #consul server
+#      port: 8500
+#      discovery:    # spring-boot-starter-actuator
+#        health-check-path: /actuator/health
+#        health-check-interval: 10s
+#        service-name: consul-slave-producer
+#  cloud:
+#    zookeeper:
+#      connect-string: 127.0.0.1:21890
+
+  cloud:
+    nacos:  #使用nacos注册中心
+      discovery:
+        server-addr: 127.0.0.1:13100,127.0.0.1:13101,127.0.0.1:13102
+        namespace: a998603d-3546-4ddc-9099-2ed82a6f3a68 #开发环境
+        group: DEFAULT_GROUP #组
+      config:
+        server-addr: 127.0.0.1:13100,127.0.0.1:13101,127.0.0.1:13102
+        file-extension: yaml  #指定读取的配置文件后缀, dataId 默认就是spring.application.name + yaml, 可以通过prefix修改
+        namespace: a998603d-3546-4ddc-9099-2ed82a6f3a68 #开发环境
+        group: DEFAULT_GROUP #组
+        prefix: zuul  #文件名 -- 如果没有配置则默认为 ${spring.appliction.name} (优先级高)
+        extension-configs:  #扩展配置,多个配置文件
+          - dataId: xiapeixin.yaml
+            group: DEFAULT_GROUP
+            refresh: false
+          - dataId: xiapeixin2.yaml
+            group: DEFAULT_GROUP
+            refresh: false
+
+    gateway:  #路由规则
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: consul-slave1 #id 任意
+          uri: lb://consul-slave1
+          predicates:
+            - Path=/sla/**  #请求路径带有这个,那么映射到上面uri的服务上
+          filters:
+            - StripPrefix=1 #访问路径 http://127.0.0.1:4013/zuul/sla/slave1/flower
+  zipkin:  #链路追踪
+    base-url: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      probability: 1
+
+#zuul: #路由网关
+#  routes:
+#    sla:  #服务名称
+#      path: /sla/** #匹配关键字，如果包含path就跳转到指定的 URL中,这里通过服务名称取url
+#      serviceId: consul-slave1 #通过在eureka注册的服务名称,如果和父级的服务名称相同可以不写;
+#
+#    #这种方式来访问 http://127.0.0.1:4013/zuul/xiapeixin/sla/slave1/flower
+#
+#  ignored-services: /** #排除服务,忽略服务真实名称
+#  prefix: /xiapeixin #访问前缀
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  config: classpath:logback-spring.xml

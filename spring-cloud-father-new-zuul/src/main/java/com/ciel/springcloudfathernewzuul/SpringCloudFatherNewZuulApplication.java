@@ -11,6 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Primary;
@@ -22,7 +23,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @EnableEurekaClient //服务注册eureka ,表示可以被Eureka注册中心发现
 @EnableAspectJAutoProxy //代理
 
-@EnableZuulProxy //开启路由,网关代理
+@EnableZuulProxy //开启路由, ;@EnableZuulProxy简单理解为@EnableZuulServer的增强版
 @EnableDiscoveryClient  //无感知远程调用需要
 @EnableCircuitBreaker //服务熔断 断路
 /**

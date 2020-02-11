@@ -1,0 +1,66 @@
+server:
+  port: 4011
+  servlet:
+    context-path: /producer
+spring:
+  application:
+    name: consul-producer
+
+#  cloud:
+#    consul:
+#      host: 127.0.0.1  #consul server
+#      port: 8500
+#      discovery:    # spring-boot-starter-actuator
+#        health-check-path: /actuator/health
+#        health-check-interval: 10s
+#        service-name: consul-slave-producer
+#  cloud:
+#    zookeeper:
+#      connect-string: 127.0.0.1:21890
+
+  cloud:
+    nacos:  #使用nacos注册中心
+      discovery:
+        server-addr: 127.0.0.1:13100,127.0.0.1:13101,127.0.0.1:13102
+        namespace: a998603d-3546-4ddc-9099-2ed82a6f3a68 #开发环境
+        group: DEFAULT_GROUP #组
+      config:
+        server-addr: 127.0.0.1:13100,127.0.0.1:13101,127.0.0.1:13102
+        file-extension: yaml  #指定读取的配置文件后缀, dataId 默认就是spring.application.name + yaml, 可以通过prefix修改
+        namespace: a998603d-3546-4ddc-9099-2ed82a6f3a68 #开发环境
+        group: DEFAULT_GROUP #组
+        prefix: producer  #文件名 -- 如果没有配置则默认为 ${spring.appliction.name} (优先级高)
+        extension-configs:  #扩展配置,多个配置文件
+          - dataId: xiapeixin.yaml
+            group: DEFAULT_GROUP
+            refresh: false
+          - dataId: xiapeixin2.yaml
+            group: DEFAULT_GROUP
+            refresh: false
+
+
+  zipkin:  #链路追踪
+    base-url: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      probability: 1
+
+swagger:
+  base-package: com.ciel.springcloudconsulslave2.controller
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true #使用ip注册
+#    instance-id: consumer-0-hystrix  #自定义服务信息,服务熔断
+#  client:
+#    service-url: #服务注册地址
+#      defaultZone: http://xia:123@springcloud.eureka0:3100/eureka/eureka/,http://xia:123@springcloud.eureka1:3101/eureka/eureka/,http://xia:123@springcloud.eureka2:3102/eureka/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  config: classpath:logback-spring.xml

@@ -11,6 +11,10 @@
         <option value="$PROJECT_DIR$/spring-cloud-father-new-config-client/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-father-new-webflux/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-new-father-kotlin/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-consul-slave1/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-consul-slave2/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-consul-slave3/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-cloud-consul-slave4/pom.xml" />
       </list>
     </option>
   </component>

@@ -22,6 +22,9 @@ public class HystrixDashboardConfig {
     //访问http://127.0.0.1:3300/consumer/turbine.stream 监控多个服务
 
 
+    /**
+     *开启监控必须添加这个bean
+     */
     // SpringBoot2.0以后，不提供 hystrix.stream节点，需要自己增加
     @Bean
     public ServletRegistrationBean<HystrixMetricsStreamServlet> getServlet(){

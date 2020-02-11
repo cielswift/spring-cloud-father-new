@@ -49,4 +49,7 @@ public class SpStream {
      */
     @Autowired
     private AutowireCapableBeanFactory capableBeanFactory;
+
+
+    //
 }

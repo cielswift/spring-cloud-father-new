@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consul-slave1/spring-cloud-consul-slave1.iml" filepath="$PROJECT_DIR$/spring-cloud-consul-slave1/spring-cloud-consul-slave1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consul-slave2/spring-cloud-consul-slave2.iml" filepath="$PROJECT_DIR$/spring-cloud-consul-slave2/spring-cloud-consul-slave2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consul-slave3/spring-cloud-consul-slave3.iml" filepath="$PROJECT_DIR$/spring-cloud-consul-slave3/spring-cloud-consul-slave3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consul-slave4/spring-cloud-consul-slave4.iml" filepath="$PROJECT_DIR$/spring-cloud-consul-slave4/spring-cloud-consul-slave4.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud-father-new.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud-father-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-api/spring-cloud-father-new-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" filepath="$PROJECT_DIR$/spring-cloud-father-new-common/spring-cloud-father-new-common.iml" />
