@@ -1,9 +1,0 @@
-server:
-  servlet:
-    context-path: /flux
-  port: 9600
-
-spring:
-  application:
-    name: flux
-

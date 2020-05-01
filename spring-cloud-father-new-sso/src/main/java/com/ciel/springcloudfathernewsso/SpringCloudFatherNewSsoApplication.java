@@ -3,6 +3,7 @@ package com.ciel.springcloudfathernewsso;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy  //开启基于注解的aop
 @MapperScan("com.ciel.common.mapper")
 @EnableTransactionManagement //开启事务
+
+/**
+ * jpa 注解
+ */
+//@EnableJpaRepositories(basePackages = "com.ciel.springcloudcommon.dao")
+//@EntityScan(basePackages = "com.ciel.entity")
+//@EnableJpaAuditing //开启自动填充
 
 public class SpringCloudFatherNewSsoApplication {
 

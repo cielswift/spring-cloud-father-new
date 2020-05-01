@@ -14,8 +14,8 @@ import org.springframework.cloud.openfeign.FeignClient;
  *
  * contextId 会作为bean的名称
  */
-@FeignClient(contextId = "sp-producer-hystrix",name="SPRINGCLOUD-PRODUCER/producer",
-        fallback= FeignHystrixFallback.class)
+@FeignClient(contextId = "sp-producer-hystrix",name="SPRINGCLOUD-PRODUCER",
+        fallback= FeignHystrixFallback.class,path = "/producer")
 public interface CusFeignHystrix extends CustomFeignHystrix {
 
 }

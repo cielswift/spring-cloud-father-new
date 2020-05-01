@@ -5,6 +5,7 @@ import com.ciel.springcloudfathernewconsumer0.service.CusFeignHystrix;
 import com.ciel.springcloudfathernewconsumer0.service.CusFeignHystrixFactory;
 import com.ciel.springcloudfathernewconsumer0.service.CusUserFeign;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;

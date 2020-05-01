@@ -26,7 +26,7 @@ public interface CustomFeign {
      */
 
     @PostMapping("/list3")
-    public List<User> list3(@RequestBody User user);
+    public List<User> list3(@RequestBody User user,@RequestParam("address") String address);
 
     /**
      * 使用HTTPClient提升连接性能,get方式

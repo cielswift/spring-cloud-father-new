@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> welcome </title>
+</head>
+<div class="panelBar" th:include="fram/head::head(xin='liuxuewen')"></div>
+<body>
+
+<th:block th:if="${msg != null}">
+    <div class="text-danger" th:text="${msg}"></div>
+</th:block>
+<form th:action="@{/log}" method="post" class="form-inline">
+
+<!--    <input type="hidden" th:value="${_csrf.token}" name="_csrf" th:if="${_csrf}"/>-->
+
+    <input type="hidden" name="callback" value="http://127.0.0.1:1810/asso/hello"/>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">userName</label>
+        <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="userName">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    记住我:<input type="checkbox" name="remember-me" value="true"/>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>
+
+<div>默认情况下表单name属性必须为username和password。</div>
+
+<div id="div1">
+    <p></p>
+</div>
+
+<hr size="20">
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+
+<div class="panelBar" th:replace="fram/foot::foot(xin='xiapeixin')">传参给其他页面</div>
+
+</body>
+
+<script>
+    var myChart = echarts.init(document.getElementById("main"));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},  //提示框组件
+        legend: {              //图例组件
+            data:['销量',"产量"]     //图例的数据数组。数组项通常为一个字符串，每一项代表一个系列的 name
+        },
+        xAxis: {             //直角坐标系 grid 中的 x 轴
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子11"]
+        },
+        yAxis: {},
+        series: [{                //系列列表
+            name: '销量',         //系列名称，用于tooltip的显示，legend 的图例筛选
+            type: 'bar',          //类型
+            data: [50,60,10,20,30,11]          //系列中的数据内容数组。数组项通常为具体的数据项
+        },{                //系列列表
+            name: '产量',         //系列名称，用于tooltip的显示，legend 的图例筛选
+            type: 'bar',          //类型
+            data: [60,50,20,10,30,11]          //系列中的数据内容数组。数组项通常为具体的数据项
+        }]
+    };
+
+    myChart.setOption(option);
+
+</script>
+</html>
+
+

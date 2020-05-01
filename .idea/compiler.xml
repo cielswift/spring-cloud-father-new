@@ -2,57 +2,57 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-cloud-father-new-webflux" />
+        <module name="spring-cloud-father-new-producer0" />
         <module name="spring-cloud-father-new-sso" />
-        <module name="spring-cloud-father-new-zuul" />
+        <module name="spring-cloud-consul-slave4" />
         <module name="spring-cloud-consul-slave3" />
         <module name="spring-cloud-consul-slave2" />
         <module name="spring-cloud-father-new-eureka1" />
-        <module name="spring-cloud-new-father-kotlin" />
+        <module name="spring-cloud-father-new-eureka0" />
         <module name="spring-cloud-father-new-api" />
         <module name="spring-cloud-father-new-entity" />
         <module name="spring-cloud-father-new-producer1" />
-        <module name="spring-cloud-father-new-producer0" />
+        <module name="spring-cloud-father-new-zuul" />
         <module name="spring-cloud-consul-slave1" />
         <module name="spring-cloud-father-new-config-client" />
         <module name="spring-cloud-father-new-config" />
+        <module name="spring-cloud-alibaba-producer1" />
         <module name="spring-cloud-father-new-common" />
-        <module name="spring-cloud-father-new-eureka0" />
-        <module name="spring-cloud-father-new-turbines" />
-        <module name="spring-cloud-consul-slave4" />
-        <module name="spring-cloud-father-new-genertor" />
         <module name="spring-cloud-father-new-eureka2" />
+        <module name="spring-cloud-father-new-turbines" />
+        <module name="spring-cloud-father-new-genertor" />
+        <module name="spring-cloud-new-father-kotlin" />
         <module name="spring-cloud-father-new-consumer0" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="spring-cloud-consul-slave1" target="12" />
-      <module name="spring-cloud-consul-slave2" target="12" />
-      <module name="spring-cloud-consul-slave3" target="12" />
-      <module name="spring-cloud-consul-slave4" target="12" />
-      <module name="spring-cloud-father-new" target="12" />
-      <module name="spring-cloud-father-new-api" target="12" />
-      <module name="spring-cloud-father-new-common" target="12" />
-      <module name="spring-cloud-father-new-config" target="12" />
-      <module name="spring-cloud-father-new-config-client" target="12" />
-      <module name="spring-cloud-father-new-consumer0" target="12" />
-      <module name="spring-cloud-father-new-entity" target="12" />
-      <module name="spring-cloud-father-new-eureka0" target="12" />
-      <module name="spring-cloud-father-new-eureka1" target="12" />
-      <module name="spring-cloud-father-new-eureka2" target="12" />
-      <module name="spring-cloud-father-new-genertor" target="12" />
-      <module name="spring-cloud-father-new-producer0" target="12" />
-      <module name="spring-cloud-father-new-producer1" target="12" />
-      <module name="spring-cloud-father-new-sso" target="12" />
-      <module name="spring-cloud-father-new-turbine" target="12" />
-      <module name="spring-cloud-father-new-turbines" target="12" />
-      <module name="spring-cloud-father-new-webflux" target="12" />
-      <module name="spring-cloud-father-new-zuul" target="12" />
-      <module name="spring-cloud-new-father-kotlin" target="12" />
+    <bytecodeTargetLevel target="12">
+      <module name="spring-cloud-consul-slave1" target="1.8" />
+      <module name="spring-cloud-consul-slave2" target="1.8" />
+      <module name="spring-cloud-consul-slave3" target="1.8" />
+      <module name="spring-cloud-consul-slave4" target="1.8" />
+      <module name="spring-cloud-father-new" target="1.8" />
+      <module name="spring-cloud-father-new-api" target="1.8" />
+      <module name="spring-cloud-father-new-common" target="1.8" />
+      <module name="spring-cloud-father-new-config" target="1.8" />
+      <module name="spring-cloud-father-new-config-client" target="1.8" />
+      <module name="spring-cloud-father-new-consumer0" target="1.8" />
+      <module name="spring-cloud-father-new-entity" target="1.8" />
+      <module name="spring-cloud-father-new-eureka0" target="1.8" />
+      <module name="spring-cloud-father-new-eureka1" target="1.8" />
+      <module name="spring-cloud-father-new-eureka2" target="1.8" />
+      <module name="spring-cloud-father-new-genertor" target="1.8" />
+      <module name="spring-cloud-father-new-producer0" target="1.8" />
+      <module name="spring-cloud-father-new-producer1" target="1.8" />
+      <module name="spring-cloud-father-new-sso" target="9" />
+      <module name="spring-cloud-father-new-turbines" target="1.8" />
+      <module name="spring-cloud-father-new-webflux" target="1.8" />
+      <module name="spring-cloud-father-new-zuul" target="1.8" />
+      <module name="spring-cloud-new-father-kotlin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -75,7 +75,6 @@
       <module name="spring-cloud-father-new-producer0" options="-parameters" />
       <module name="spring-cloud-father-new-producer1" options="-parameters" />
       <module name="spring-cloud-father-new-sso" options="-parameters" />
-      <module name="spring-cloud-father-new-turbine" options="-parameters" />
       <module name="spring-cloud-father-new-turbines" options="-parameters" />
       <module name="spring-cloud-father-new-webflux" options="-parameters" />
       <module name="spring-cloud-father-new-zuul" options="-parameters" />

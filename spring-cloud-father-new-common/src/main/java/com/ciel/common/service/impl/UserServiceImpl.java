@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ciel.api.IRoleService;
 import com.ciel.api.IUserRoleService;
 import com.ciel.api.IUserService;
+import com.ciel.api.anno.AopTe;
 import com.ciel.common.mapper.UserMapper;
 import com.ciel.entity.Role;
 import com.ciel.entity.User;
@@ -68,4 +69,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return true;
     }
 
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean testTransaction() {
+
+        removeById("123");
+
+        removeById("456");
+
+        return true;
+    }
+
+    @Override
+    @AopTe(rollback = Exception.class)
+    public boolean testAop() {
+
+        return true;
+    }
 }

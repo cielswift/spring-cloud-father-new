@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 自定义登录验证
- * @Author Sans
- * @CreateTime 2019/10/1 19:11
  */
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {

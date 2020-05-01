@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> welcome </title>
+</head>
+<div class="panelBar" th:include="fram/head::head(xin='liuxuewen')"></div>
+<body>
+
+
+<h2>图片预览</h2>
+<img alt="previewImg" id="previewImg" src="http://nginx.ciel.cl/img/49.jpg" width="600" height="400">
+<form>
+    <input type="file" class="btw-success" name="myfile" id="myfile"/>
+</form>
+
+
+<h2>视频预览</h2>
+<video width="400" height="500" controls="controls">
+</video>
+</div>  
+
+<input id="myvideo" type="file" accept="video/*" />
+
+
+<div class="panelBar" th:replace="fram/foot::foot(xin='xiapeixin')">传参给其他页面</div>
+
+</body>
+
+<script>
+
+    $(function(){
+        $("#myfile").change(function(){
+            var imgPath = getObjectURL(this.files[0]);
+            $("#previewImg").attr({
+                src:imgPath
+            })
+        });
+
+        function getObjectURL(file) {
+            let url = null ;
+            if (window.createObjectURL!=undefined) {
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) {
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) {
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+    })
+
+    $("#myvideo").change(function(){
+
+        var files = this.files;
+
+        if(!files.length) {
+
+            return;
+        }
+        $("video").attr("src", window.URL.createObjectURL(files[0]));
+
+        $("video").get(0).play();
+
+    });
+
+
+</script>
+</html>
+
+

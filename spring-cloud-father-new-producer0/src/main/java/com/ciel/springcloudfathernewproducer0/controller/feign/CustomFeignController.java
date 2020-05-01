@@ -7,6 +7,7 @@ import com.ciel.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class CustomFeignController implements CustomFeign  {
     }
 
     @Override
-    public List<User> list3(User user) {
+    public List<User> list3(@RequestBody User user, String address) {
         return iUserService.list(new LambdaQueryWrapper<User>().eq(User::getName,user.getName()));
     }
 

@@ -42,7 +42,7 @@ public class OAuth2ResourceServerJwt extends ResourceServerConfigurerAdapter {
      *
      * http://127.0.0.1:3200/producer/user/list
      * 改header ; Authorization =Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsic3ByaW5nY2xvdWQtcHJvZHVjZXIiXSwidXNlcl9uYW1lIjoieGlhcGVpeGluIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU4MDY2MTE1MiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9hZG1pbiIsInN5c19hZGQiXSwianRpIjoiZWU0NDFhMjAtNzJjNy00NzAwLTkyZTItYTA1ZWVlZjU1OGM3IiwiY2xpZW50X2lkIjoieGlhcGVpeGluIn0.3xIMWQOtOQ8YyQfRv01a31VXOUyjSjExCzi2LAHEhnU
-     *
+     *一定要加 Bearer
      */
 
 

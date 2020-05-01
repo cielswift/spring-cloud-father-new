@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 使用 fallbackFactory
  */
-@FeignClient(contextId = "sp-producer-hystrix-2",name="SPRINGCLOUD-PRODUCER/producer",
-        fallbackFactory = FeignHystrixFallbackFactory.class )
+@FeignClient(contextId = "sp-producer-hystrix-2",name="SPRINGCLOUD-PRODUCER",
+        fallbackFactory = FeignHystrixFallbackFactory.class ,path = "/producer")
 public interface CusFeignHystrixFactory extends CustomFeignHystrixFactory {
 
     /**

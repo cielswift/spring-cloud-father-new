@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 /**
  * 自定义权限注解验证
- * @Author Sans
- * @CreateTime 2019/10/6 13:31
  */
 @Component
 public class UserPermissionEvaluator implements PermissionEvaluator {

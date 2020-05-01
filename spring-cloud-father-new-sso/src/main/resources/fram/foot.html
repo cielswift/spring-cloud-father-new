@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="panelBar" th:fragment="foot(xin)">
+    <!--以下为公共部分-->
+    <div class="pages">
+        <div class="" th:text="${xin}" th:classappend="${xin eq 'xiapeixin' ? 'text-danger': 'text-info'}"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -21,4 +21,10 @@ public interface IUserService extends IService<User> {
     public User findByUserName(String userName);
 
     public List<Role> getRolesByUser(User user);
+
+    public boolean testTransaction();
+
+    public boolean testAop();
+
+
 }

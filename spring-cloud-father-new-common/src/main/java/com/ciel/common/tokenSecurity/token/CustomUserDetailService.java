@@ -35,7 +35,8 @@ public class CustomUserDetailService implements UserDetailsService {
 
             roles.forEach(t -> {
                 authorities.add(new SimpleGrantedAuthority("ROLE_".concat(t.getName())));
-                roleService.getPermissionsByRole(t).stream().forEach(j -> authorities.add(new SimpleGrantedAuthority(j.getName())));
+                roleService.getPermissionsByRole(t).stream()
+                        .forEach(j -> authorities.add(new SimpleGrantedAuthority(j.getName())));
             });
 
             CustomUser customUser = new CustomUser(userName, user.getPassword(), authorities);
