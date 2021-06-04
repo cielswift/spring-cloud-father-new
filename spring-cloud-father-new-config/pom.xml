@@ -36,7 +36,7 @@
         <dependency> <!-- Apache HttpClient -->
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.10</version>
+            <version>4.5.13</version>
         </dependency>
 
         <!-- 可视化数据监控dashboard ,针对 Hystrix 进行实时监控的工具-->
