@@ -57,7 +57,7 @@
         <dependency> <!-- 使用Apache HttpClient替换Feign原生httpURLConnection -->
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.10</version>
+            <version>4.5.13</version>
         </dependency>
 
         <dependency> <!--feign http优化-->
